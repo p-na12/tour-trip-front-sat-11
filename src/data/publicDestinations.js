@@ -55,3 +55,5 @@ export const destinations = [
     image: mondulkiri,
   },
 ];
+
+export const publicDestinations = destinations;

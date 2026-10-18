@@ -6,7 +6,6 @@
     import lilyAvatar from "../../../assets/images/avatars/Lina.jpg";
     import linaAvatar from "../../../assets/images/avatars/Lily.jpg";
     import danielAvatar from "../../../assets/images/avatars/Daniel.jpg";
-    import { Link } from "react-router-dom";
     import {
     ArrowLeft,
     ArrowRight,
@@ -15,7 +14,6 @@
     ChevronLeft,
     ChevronRight,
     Clock3,
-    Heart,
     MapPin,
     Plane,
     Star,
@@ -150,7 +148,6 @@
     export default function TripDetailPage() {
     const [activeImage, setActiveImage] = useState(0);
     const [activeDay, setActiveDay] = useState(0);
-    const [liked, setLiked] = useState(false);
     const [reviewStart, setReviewStart] = useState(0);
 
     const visibleReviews = useMemo(() => {

@@ -1,10 +1,8 @@
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Plus, Search, Trash2 } from "lucide-react";
 import CategoryHeader from "../../../components/admin/CategoryHeader";
 import CatalogPreviewCard from "../../../components/admin/CatalogPreviewCard";
-import { Calendar, Save, RotateCcw, Clock, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Calendar, Save, RotateCcw, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 export default function CreateCategoryPage() {
   const [formData, setFormData] = useState({

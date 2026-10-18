@@ -29,7 +29,7 @@ export function useIsMobile(breakpoint = 768) {
 }
 
 /**
- * Shared external store for the mobile sidebar drawer, so the Topbar
+ * Shared external store for the mobile sidebar drawer, so the admin header
  * hamburger can control this component without any global context.
  */
 let mobileOpen = false;

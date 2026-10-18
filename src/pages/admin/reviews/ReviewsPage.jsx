@@ -1,4 +1,4 @@
-import { Star, User, MessageSquare } from "lucide-react";
+import { Star, MessageSquare } from "lucide-react";
 import ReviewCard from "../../../components/admin/ReviewCard";
 import ReviewRow from "../../../components/admin/ReviewRow";
 

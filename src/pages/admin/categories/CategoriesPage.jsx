@@ -5,7 +5,6 @@ import CategoryFilters from "./components/CategoryFilters";
 import CategoryTable from "./components/CategoryTable";
 import Pagination from "./components/Pagination";
 import CategoryFormModal from "./components/CategoryFormModal";
-import CategoryViewModal from "./components/CategoryViewModal";
 import DeleteConfirmDialog from "./components/DeleteConfirmDialog";
 import { PlusIcon, AlertTriangleIcon } from "./components/icons";
 
@@ -28,7 +27,6 @@ export default function CategoriesPage() {
   } = useCategories();
 
   const [formModal, setFormModal] = useState({ isOpen: false, category: null });
-  const [viewModal, setViewModal] = useState({ isOpen: false, category: null });
   const [deleteDialog, setDeleteDialog] = useState({
     isOpen: false,
     category: null,

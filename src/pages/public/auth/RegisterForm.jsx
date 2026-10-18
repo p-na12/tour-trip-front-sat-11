@@ -1,7 +1,8 @@
 import React from "react";
 import {User, Mail,Lock, KeyRound, Eye, EyeOff} from "lucide-react";
+import { Link } from "react-router-dom";
 
-const RegisterForm = () => {
+const RegisterPage = () => {
     const [showPassword, setShowPassword] = React.useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
     
@@ -9,8 +10,10 @@ const RegisterForm = () => {
     <div className="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
       style={{backgroundImage:"url('https://i.pinimg.com/736x/a6/85/f8/a685f8f6733ce66f7cd815400d84f25e.jpg')",}}>
    
-      <div className="absolute top-8 left-10 z-10 inset-full bg-black/50">
-        <h1 className="text-3xl font-bold text-white">VoyageQuest</h1>
+      <div className="absolute left-4 top-5 z-10 sm:left-8 sm:top-8">
+        <Link to="/" className="text-2xl font-bold text-white sm:text-3xl">
+          Tour-Trip
+        </Link>
       </div>
 
       {/* Register Card */}
@@ -118,7 +121,7 @@ const RegisterForm = () => {
         {/* Footer */}
         <div className="mt-6 text-center">
           <p className="text-sm text-slate-600">Already have an account? {" "}
-            <a href="# "     className="font-medium text-blue-700 hover:underline">Log in</a>
+            <Link to="/login" className="font-medium text-blue-700 hover:underline">Log in</Link>
           </p>
 
           <p className="mt-3 text-xs text-slate-400">By signing up, you agree to our Terms of Service and Privacy Policy.</p>
@@ -128,4 +131,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegisterPage;

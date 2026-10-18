@@ -20,7 +20,6 @@ const Stepper = ({ step, furthestStep, onJump }) => {
             </svg>
             {STEPS.map((label, i) => {
               const idx = i + 1;
-              const done = idx < step || idx <= furthestStep && idx < step;
               const isCompleted = idx < step;
               const isActive = idx === step;
               const clickable = idx <= furthestStep;
