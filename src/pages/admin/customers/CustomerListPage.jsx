@@ -1,6 +1,6 @@
 // import React, { useState } from "react";
 import { Plus, Search, Trash2 } from "lucide-react";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState } from "react";
 import { cx } from "../../../utils/helpers";
 import { useNavigate } from "react-router-dom";
 

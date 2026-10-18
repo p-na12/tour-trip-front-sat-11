@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import bgLogin from "../../assets/images/common/bg_login.jpg";
 import { HiOutlineMail, HiOutlineLockClosed, HiEye, HiEyeOff } from "react-icons/hi";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
@@ -13,14 +14,16 @@ const LoginForm = () => {
         <img src={bgLogin} alt="Mountain" className="absolute inset-0 w-full h-full object-cover scale-105 blur-[1px]"/>
         <div className="absolute inset-0 bg-black/25" />
         <div className="relative z-10 px-9 pt-8">
-          <h1 className="text-white text-3xl font-semibold">VoyageQuest</h1>
+          <Link to="/" className="text-3xl font-semibold text-white">
+            Tour-Trip
+          </Link>
         </div>
 
         <div className="relative z-10 flex justify-center items-center min-h-[calc(100vh-100px)] px-4">
           <div className="w-full max-w-[445px] rounded-lg bg-white/85 backdrop-blur-md shadow-xl px-6 py-6">
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold text-blue-900">Welcome Back</h2>
-              <p className="text-sm text-gray-500 mt-2">Continue your journey with VoyageQuest.</p>
+              <p className="mt-2 text-sm text-gray-500">Continue your journey with Tour-Trip.</p>
             </div>
 
             <form className="space-y-4">
@@ -38,9 +41,9 @@ const LoginForm = () => {
               <div>
                 <div className="flex justify-between items-center mb-1.5">
                   <label className="text-sm font-medium text-gray-800">Password</label>
-                  <button type="button" className="text-sm text-blue-700 hover:underline">
+                  <Link to="/forgot-password" className="text-sm text-blue-700 hover:underline">
                     Forgot Password?
-                  </button>
+                  </Link>
                 </div>
                 <div className="relative">
                   <HiOutlineLockClosed className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
@@ -71,20 +74,20 @@ const LoginForm = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-2">
-              <button type="button"className="h-9 bg-white border border-gray-200 rounded-md flex items-center justify-center gap-2 text-sm text-gray-700 hover:bg-gray-50">
+              <button type="button" className="h-9 bg-white border border-gray-200 rounded-md flex items-center justify-center gap-2 text-sm text-gray-700 hover:bg-gray-50">
                 <FaGoogle className="text-red-500 w-3.5 h-3.5" />
                 Google
               </button>
 
-              <button type="button"className="h-9 bg-blue-600 hover:bg-blue-700 rounded-md flex items-center justify-center gap-2 text-sm text-white"
+              <button type="button" className="h-9 bg-blue-600 hover:bg-blue-700 rounded-md flex items-center justify-center gap-2 text-sm text-white"
               ><FaFacebook className="w-3.5 h-3.5" />
                 Facebook
               </button>
             </div>
-            <p className="text-center text-sm text-gray-500 mt-5">Don't have an account?{" "}
-              <button type="button" className="text-blue-700 font-medium hover:underline">
+            <p className="mt-5 text-center text-sm text-gray-500">Don't have an account?{" "}
+              <Link to="/register" className="text-blue-700 font-medium hover:underline">
                 Sign up
-              </button>
+              </Link>
             </p>
           </div>
         </div>
