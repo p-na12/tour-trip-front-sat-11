@@ -7,7 +7,6 @@ import {
   Sun,
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
-
 import angkorWat from "../../assets/images/trips/Angkor-Wat(1).jpg";
 import tonleLake from "../../assets/images/trips/tonle-lake(1).jpg";
 import { publicDestinations } from "../../data/publicDestinations";
@@ -37,7 +36,7 @@ const travelTips = [
 function AttractionCard({ attraction, featured = false }) {
   return (
     <article
-      className={`group relative isolate flex min-h-64 overflow-hidden rounded-2xl bg-slate-900 shadow-sm sm:min-h-72 ${
+      className={`group relative isolate flex min-h-64 overflow-hidden rounded-2xl border border-emerald-600 bg-slate-900 shadow-sm sm:min-h-72 ${
         featured ? "lg:col-span-2" : ""
       }`}
     >
@@ -64,7 +63,7 @@ function RecommendedTourCard({ tour }) {
   );
 
   return (
-    <article className="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+    <article className="group overflow-hidden rounded-2xl border border-emerald-600 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       <Link
         to={`/tours/${tour.slug}`}
         className="relative block overflow-hidden"
@@ -169,8 +168,8 @@ export default function DestinationPage() {
   ].slice(0, 4);
 
   return (
-    <main className="min-h-screen bg-[#f7f8fc] pb-12">
-      <div className="mx-auto max-w-7xl px-4 pt-5 sm:px-6 lg:px-8 lg:pt-8">
+   <main className="w-full min-w-0 min-h-screen bg-[#f7f8fc] pb-12">
+  <div className="mx-auto w-full max-w-7xl px-4 pt-5 sm:px-6 lg:px-8 lg:pt-8">
         <section className="relative isolate flex min-h-[300px] overflow-hidden rounded-2xl bg-slate-900 sm:min-h-[380px] lg:min-h-[430px]">
           <img
             src={destination.image}
@@ -220,7 +219,7 @@ export default function DestinationPage() {
 
         <section
           id="recommended-tours"
-          className="mt-8 rounded-2xl bg-slate-100/80 px-4 py-6 sm:px-6"
+          className="mt-8 rounded-2xl bg-slate-100/80 px-4 py-6 sm:px-0"
           aria-labelledby="recommended-tours-heading"
         >
           <div className="mb-4 flex items-center justify-between gap-4">
@@ -238,7 +237,7 @@ export default function DestinationPage() {
             </Link>
           </div>
           {recommendedTours.length > 0 ? (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {recommendedTours.map((tour) => (
                 <RecommendedTourCard key={tour.id} tour={tour} />
               ))}
@@ -268,7 +267,7 @@ export default function DestinationPage() {
             {travelTips.map(({ title, description, icon: Icon, iconClass }) => (
               <article
                 key={title}
-                className="rounded-xl border border-slate-100 bg-white px-5 py-5 text-center shadow-sm"
+                className="rounded-xl border border-emerald-600 bg-white px-5 py-5 text-center shadow-sm"
               >
                 <span
                   className={`mx-auto inline-flex h-11 w-11 items-center justify-center rounded-full ${iconClass}`}

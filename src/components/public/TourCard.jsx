@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function TourCard({ tour }) {
   return (
-    <article className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+    <article className="overflow-hidden rounded-2xl border border-emerald-600 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       <Link to={`/tours/${tour.slug}`} className="block overflow-hidden">
         <img
           src={tour.image}

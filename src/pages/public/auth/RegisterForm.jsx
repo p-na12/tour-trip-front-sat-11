@@ -1,134 +1,173 @@
-import React from "react";
-import {User, Mail,Lock, KeyRound, Eye, EyeOff} from "lucide-react";
+import { useState } from "react";
+import { Eye, EyeOff, KeyRound, LockKeyhole, Mail, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
+import AuthPageShell from "../../../components/auth/AuthPageShell";
 
-const RegisterPage = () => {
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-    
+const inputClassName =
+  "h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-11 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50";
+
+const RegisterForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   return (
-    <div className="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
-      style={{backgroundImage:"url('https://i.pinimg.com/736x/a6/85/f8/a685f8f6733ce66f7cd815400d84f25e.jpg')",}}>
-   
-      <div className="absolute left-4 top-5 z-10 sm:left-8 sm:top-8">
-        <Link to="/" className="text-2xl font-bold text-white sm:text-3xl">
-          Tour-Trip
-        </Link>
-      </div>
+    <AuthPageShell>
+      <div className="max-w-md">
+        <p className="text-sm font-semibold text-emerald-700">
+          Your next adventure starts here
+        </p>
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          Create your account
+        </h1>
+        <p className="mt-3 text-sm leading-6 text-slate-600">
+          Save your plans and make your Cambodia trip your own.
+        </p>
 
-      {/* Register Card */}
-      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white/90 backdrop-blur-md shadow-2xl p-8">
-        <div className="text-center">
-          <h2 className="text-4xl font-bold text-slate-800">
-            Start Your Journey
-          </h2>
-
-          <p className="mt-3 text-sm text-slate-500">
-            Create an account to unlock extraordinary
-            destinations.
-          </p>
-        </div>
-
-        <form className="mt-8 space-y-5">
-          {/* Full Name */}
-          <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700">
-              Full Name
-            </label>
-
-            <div className="relative">
-              <User
-                size={18}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-              />
-
-              <input
-                type="text"
-                placeholder="Dy Dara"
-                className="w-full rounded-lg border border-slate-300 py-3 pl-10 pr-4 outline-none focus:border-blue-500"
-              />
+        <form className="mt-7 space-y-5">
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label
+                htmlFor="register-name"
+                className="block text-sm font-semibold text-slate-800"
+              >
+                Full name
+              </label>
+              <div className="relative mt-2">
+                <UserRound
+                  className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                  aria-hidden="true"
+                />
+                <input
+                  id="register-name"
+                  type="text"
+                  autoComplete="name"
+                  placeholder="Your name"
+                  className={inputClassName}
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Email */}
-          <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700">
-              Email Address
-            </label>
-
-            <div className="relative">
-              <Mail
-                size={18}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-              />
-
-              <input
-                type="email"
-                placeholder="dydara12@gmail.com"
-                className="w-full rounded-lg border border-slate-300 py-3 pl-10 pr-4 outline-none focus:border-blue-500"
-              />
+            <div>
+              <label
+                htmlFor="register-email"
+                className="block text-sm font-semibold text-slate-800"
+              >
+                Email address
+              </label>
+              <div className="relative mt-2">
+                <Mail
+                  className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                  aria-hidden="true"
+                />
+                <input
+                  id="register-email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="you@example.com"
+                  className={inputClassName}
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Password */}
-          <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700">
-              Password
-            </label>
-
-            <div className="relative">
-              <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"/>
-
-              <input type={showPassword ? "text" : "password"} placeholder="••••••••"
-                className="w-full rounded-lg border border-slate-300 py-3 pl-10 pr-4 outline-none focus:border-blue-500"/>
-                <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400" onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? <EyeOff size={18}/> : <Eye size={18}/>}
+            <div>
+              <label
+                htmlFor="register-password"
+                className="block text-sm font-semibold text-slate-800"
+              >
+                Password
+              </label>
+              <div className="relative mt-2">
+                <LockKeyhole
+                  className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                  aria-hidden="true"
+                />
+                <input
+                  id="register-password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  placeholder="Create a password"
+                  className={inputClassName}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((visible) => !visible)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition hover:text-emerald-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" aria-hidden="true" />
+                  ) : (
+                    <Eye className="h-4 w-4" aria-hidden="true" />
+                  )}
                 </button>
-         
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="register-confirm-password"
+                className="block text-sm font-semibold text-slate-800"
+              >
+                Confirm password
+              </label>
+              <div className="relative mt-2">
+                <KeyRound
+                  className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                  aria-hidden="true"
+                />
+                <input
+                  id="register-confirm-password"
+                  type={showConfirmPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  placeholder="Re-enter your password"
+                  className={inputClassName}
+                />
+                <button
+                  type="button"
+                  onClick={() =>
+                    setShowConfirmPassword((visible) => !visible)
+                  }
+                  aria-label={
+                    showConfirmPassword
+                      ? "Hide confirm password"
+                      : "Show confirm password"
+                  }
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition hover:text-emerald-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+                >
+                  {showConfirmPassword ? (
+                    <EyeOff className="h-4 w-4" aria-hidden="true" />
+                  ) : (
+                    <Eye className="h-4 w-4" aria-hidden="true" />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Confirm Password */}
-          <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700">
-              Confirm Password
-            </label>
-
-            <div className="relative">
-              <KeyRound
-                size={18}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-              />
-
-              <input type={showConfirmPassword ? "text" : "password"} placeholder="••••••••"
-                className="w-full rounded-lg border border-slate-300 py-3 pl-10 pr-4 outline-none focus:border-blue-500"
-              />
-              <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-                {showConfirmPassword ? <EyeOff size={18}/> : <Eye size={18}/>}
-              </button>
-            </div>
-          </div>
-
-          {/* Button */}
           <button
             type="submit"
-            className="w-full rounded-lg bg-blue-900 py-3 font-medium text-white transition hover:bg-blue-800"
+            className="h-12 w-full rounded-xl bg-emerald-700 px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
           >
-            Sign Up
+            Create account
           </button>
         </form>
 
-        {/* Footer */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-slate-600">Already have an account? {" "}
-            <Link to="/login" className="font-medium text-blue-700 hover:underline">Log in</Link>
-          </p>
-
-          <p className="mt-3 text-xs text-slate-400">By signing up, you agree to our Terms of Service and Privacy Policy.</p>
-        </div>
+        <p className="mt-6 text-center text-sm text-slate-600">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-semibold text-emerald-700 hover:text-emerald-800"
+          >
+            Sign in
+          </Link>
+        </p>
+        <p className="mx-auto mt-4 max-w-sm text-center text-xs leading-5 text-slate-500">
+          By creating an account, you agree to our Terms of Service and Privacy
+          Policy.
+        </p>
       </div>
-    </div>
+    </AuthPageShell>
   );
 };
 
-export default RegisterPage;
+export default RegisterForm;

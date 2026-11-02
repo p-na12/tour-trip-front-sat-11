@@ -1,98 +1,106 @@
 import { useState } from "react";
+import { Eye, EyeOff, LockKeyhole, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
-import bgLogin from "../../assets/images/common/bg_login.jpg";
-import { HiOutlineMail, HiOutlineLockClosed, HiEye, HiEyeOff } from "react-icons/hi";
-import { FaGoogle, FaFacebook } from "react-icons/fa";
-
+import AuthPageShell from "./AuthPageShell";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <div className="relative flex-1 min-h-[600px] overflow-hidden">
-        <img src={bgLogin} alt="Mountain" className="absolute inset-0 w-full h-full object-cover scale-105 blur-[1px]"/>
-        <div className="absolute inset-0 bg-black/25" />
-        <div className="relative z-10 px-9 pt-8">
-          <Link to="/" className="text-3xl font-semibold text-white">
-            Tour-Trip
-          </Link>
-        </div>
+    <AuthPageShell>
+      <div className="max-w-md">
+        <p className="text-sm font-semibold text-emerald-700">Welcome back</p>
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          Sign in to your account
+        </h1>
+        <p className="mt-3 text-sm leading-6 text-slate-600">
+          Pick up where your next Cambodia adventure begins.
+        </p>
 
-        <div className="relative z-10 flex justify-center items-center min-h-[calc(100vh-100px)] px-4">
-          <div className="w-full max-w-[445px] rounded-lg bg-white/85 backdrop-blur-md shadow-xl px-6 py-6">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-blue-900">Welcome Back</h2>
-              <p className="mt-2 text-sm text-gray-500">Continue your journey with Tour-Trip.</p>
+        <form className="mt-8 space-y-5">
+          <div>
+            <label
+              htmlFor="login-email"
+              className="block text-sm font-semibold text-slate-800"
+            >
+              Email address
+            </label>
+            <div className="relative mt-2">
+              <Mail
+                className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                aria-hidden="true"
+              />
+              <input
+                id="login-email"
+                type="email"
+                autoComplete="email"
+                placeholder="explorer@example.com"
+                className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50"
+              />
             </div>
-
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-800 mb-1.5">
-                  Email Address
-                </label>
-                <div className="relative">
-                  <HiOutlineMail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                  <input type="email" placeholder="explorer@example.com"
-                    className="w-full h-10 rounded-md bg-gray-100/90 border border-transparent pl-9 pr-3 text-xs text-gray-700 outline-none focus:border-blue-700 focus:bg-white"/>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center mb-1.5">
-                  <label className="text-sm font-medium text-gray-800">Password</label>
-                  <Link to="/forgot-password" className="text-sm text-blue-700 hover:underline">
-                    Forgot Password?
-                  </Link>
-                </div>
-                <div className="relative">
-                  <HiOutlineLockClosed className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                  <input type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
-                    className="w-full h-10 rounded-md bg-gray-100/90 border border-transparent pl-9 pr-10 text-xs outline-none focus:border-blue-700 focus:bg-white"/>
-                  <button type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-700">
-                    {showPassword ? (
-                      <HiEyeOff className="w-4 h-4" />
-                    ) : (
-                      <HiEye className="w-4 h-4" />
-                    )}
-                  </button>
-                </div>
-              </div>
-              <button type="submit"
-                className="w-full h-10 rounded-md bg-blue-800 hover:bg-blue-900 text-white text-sm font-medium transition duration-200">
-                Login
-              </button>
-            </form>
-
-            <div className="flex items-center gap-2 my-6">
-              <div className="flex-1 h-px bg-gray-300" />
-              <span className="text-sm text-gray-500">Or continue with</span>
-              <div className="flex-1 h-px bg-gray-300" />
-            </div>
-
-            <div className="grid grid-cols-2 gap-2">
-              <button type="button" className="h-9 bg-white border border-gray-200 rounded-md flex items-center justify-center gap-2 text-sm text-gray-700 hover:bg-gray-50">
-                <FaGoogle className="text-red-500 w-3.5 h-3.5" />
-                Google
-              </button>
-
-              <button type="button" className="h-9 bg-blue-600 hover:bg-blue-700 rounded-md flex items-center justify-center gap-2 text-sm text-white"
-              ><FaFacebook className="w-3.5 h-3.5" />
-                Facebook
-              </button>
-            </div>
-            <p className="mt-5 text-center text-sm text-gray-500">Don't have an account?{" "}
-              <Link to="/register" className="text-blue-700 font-medium hover:underline">
-                Sign up
-              </Link>
-            </p>
           </div>
-        </div>
+
+          <div>
+            <div className="flex items-center justify-between gap-3">
+              <label
+                htmlFor="login-password"
+                className="text-sm font-semibold text-slate-800"
+              >
+                Password
+              </label>
+              <Link
+                to="/forgot-password"
+                className="text-sm font-semibold text-emerald-700 hover:text-emerald-800"
+              >
+                Forgot password?
+              </Link>
+            </div>
+            <div className="relative mt-2">
+              <LockKeyhole
+                className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                aria-hidden="true"
+              />
+              <input
+                id="login-password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
+                placeholder="Enter your password"
+                className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-12 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((visible) => !visible)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition hover:text-emerald-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" aria-hidden="true" />
+                ) : (
+                  <Eye className="h-4 w-4" aria-hidden="true" />
+                )}
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="mt-2 h-12 w-full rounded-xl bg-emerald-700 px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+          >
+            Sign in
+          </button>
+        </form>
+
+        <p className="mt-7 text-center text-sm text-slate-600">
+          Don&apos;t have an account?{" "}
+          <Link
+            to="/register"
+            className="font-semibold text-emerald-700 hover:text-emerald-800"
+          >
+            Create an account
+          </Link>
+        </p>
       </div>
-    </div>
+    </AuthPageShell>
   );
 };
 

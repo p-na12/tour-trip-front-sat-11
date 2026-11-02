@@ -5,7 +5,7 @@ export default function DestinationCard({ destination }) {
   return (
     <Link
       to={`/destinations/${destination.id}`}
-      className="group relative isolate flex min-h-[270px] overflow-hidden rounded-2xl bg-slate-900 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:min-h-[300px]"
+      className="group relative isolate flex min-h-[270px] overflow-hidden rounded-2xl border border-emerald-600 bg-slate-900 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:min-h-[300px] "
     >
       <img
         src={destination.image}
