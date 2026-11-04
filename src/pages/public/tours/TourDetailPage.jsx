@@ -91,16 +91,7 @@ function TourBookingCard({ tour }) {
         <span className="ml-1 text-sm font-normal text-slate-500">/ person</span>
       </p>
       <Link
-        to="/login"
-        state={{
-          bookingTour: {
-            id: tour.id,
-            slug: tour.slug,
-            title: tour.title,
-            price: tour.price,
-            location: tour.location,
-          },
-        }}
+        to={`/booking/${tour.slug}`}
         className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#00875f] px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
       >
         <CalendarCheck2 size={18} aria-hidden="true" />

@@ -14,14 +14,18 @@ import ReviewsPage from "../pages/admin/reviews/ReviewsPage";
 import TourSchedules from "../pages/admin/tours/TourSchedules";
 import AboutPage from "../pages/public/about/AboutPage";
 import MyBookingsPage from "../pages/public/bookings/MyBookingsPage";
+import BookingFormPage from "../pages/public/bookings/BookingFormPage";
+import BookingDetailsPage from "../pages/public/bookings/BookingDetailsPage";
+import ProfilePage from "../pages/public/ProfilePage";
 import ContactPage from "../pages/public/contact/ContactPage";
 import DestinationsPagePublic from "../pages/public/destinations/DestinationsPage";
 import DestinationPage from "../components/public/DestinationPage";
 import PublicHome from "../pages/public/PublicHome";
-import ForgotPassword from "../pages/customer/ForgotPassword";
-import LoginForm from "../components/auth/LoginForm";
+import LoginPage from "../pages/public/auth/LoginPage";
+import ForgotPasswordPage from "../pages/public/auth/ForgotPasswordPage";
+import RegisterPage from "../pages/public/auth/RegisterPage";
+import ProtectedRoute from "../components/auth/ProtectedRoute";
 import OtpVerifyPage from "../pages/public/auth/OtpVerifyPage";
-import RegisterForm from "../pages/public/auth/RegisterForm";
 import TourDetail from "../components/tour/TourDetailHero";
 import TripDetailPage from "../pages/public/trips/TripDetailPage";
 import ToursPage from "../pages/public/tours/ToursPage";
@@ -40,14 +44,19 @@ export function AppRoutes() {
         <Route path="tours" element={<ToursPage />} />
         <Route path="tours/:slug" element={<TourDetailPage />} />
         <Route path="trips/:id" element={<TripDetailPage />} />
-        <Route path="my-bookings" element={<MyBookingsPage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<ContactPage />} />
-        <Route path="login" element={<LoginForm />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="register" element={<RegisterForm />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="register" element={<RegisterPage />} />
         <Route path="verify-otp" element={<OtpVerifyPage />} />
         <Route path="tour/detail" element={<TourDetail />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="my-bookings" element={<MyBookingsPage />} />
+          <Route path="booking/:slug" element={<BookingFormPage />} />
+          <Route path="booking-details/:bookingId" element={<BookingDetailsPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+        </Route>
       </Route>
 
       <Route path="/admin" element={<AdminLayout />}>

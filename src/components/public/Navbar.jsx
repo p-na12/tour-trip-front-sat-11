@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Globe2, Menu, X } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
+import { ChevronDown, Globe2, LogOut, Menu, UserRound, X } from "lucide-react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/auth";
 
-const navigation = [
+const publicNavigation = [
   { label: "Home", to: "/" },
   { label: "Destinations", to: "/destinations" },
   { label: "Tours", to: "/tours" },
-  { label: "My Bookings", to: "/my-bookings" },
   { label: "About Us", to: "/about" },
   { label: "Contact", to: "/contact" },
 ];
@@ -20,6 +20,20 @@ const linkClass = ({ isActive }) =>
 
 export default function PublicNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const { user, isAuthenticated, signOut, notify } = useAuth();
+  const navigate = useNavigate();
+  const navigation = isAuthenticated
+    ? [...publicNavigation.slice(0, 3), { label: "My Bookings", to: "/my-bookings" }, ...publicNavigation.slice(3)]
+    : publicNavigation;
+
+  const handleLogout = () => {
+    signOut();
+    setProfileOpen(false);
+    setMenuOpen(false);
+    notify("You have been signed out.");
+    navigate("/");
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white">
@@ -51,18 +65,32 @@ export default function PublicNavbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <Link
-            to="/login"
-            className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 transition hover:text-emerald-700"
-          >
-            Sign In
-          </Link>
-          <Link
-            to="/register"
-            className="rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
-          >
-            Sign Up
-          </Link>
+          {isAuthenticated ? (
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setProfileOpen((open) => !open)}
+                aria-expanded={profileOpen}
+                className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+              >
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-emerald-50 text-emerald-800"><UserRound size={17} /></span>
+                <span className="max-w-32 truncate">{user.name}</span>
+                <ChevronDown size={16} />
+              </button>
+              {profileOpen && (
+                <div className="absolute right-0 top-full z-50 mt-2 w-52 rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
+                  <Link to="/profile" onClick={() => setProfileOpen(false)} className="block rounded-lg px-3 py-2.5 text-sm text-slate-700 hover:bg-slate-50">My Profile</Link>
+                  <Link to="/my-bookings" onClick={() => setProfileOpen(false)} className="block rounded-lg px-3 py-2.5 text-sm text-slate-700 hover:bg-slate-50">My Bookings</Link>
+                  <button type="button" onClick={handleLogout} className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-red-700 hover:bg-red-50"><LogOut size={15} />Logout</button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 transition hover:text-emerald-700">Sign In</Link>
+              <Link to="/register" className="rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800">Sign Up</Link>
+            </>
+          )}
         </div>
 
         <button
@@ -99,21 +127,20 @@ export default function PublicNavbar() {
                 {item.label}
               </NavLink>
             ))}
-            <div className="mt-3 flex gap-3 border-t border-slate-100 pt-4">
-              <Link
-                to="/login"
-                className="flex-1 rounded-lg border border-slate-200 px-4 py-2.5 text-center text-sm font-semibold text-slate-700"
-                onClick={() => setMenuOpen(false)}
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/register"
-                className="flex-1 rounded-lg bg-emerald-700 px-4 py-2.5 text-center text-sm font-semibold text-white"
-                onClick={() => setMenuOpen(false)}
-              >
-                Sign Up
-              </Link>
+            <div className="mt-3 border-t border-slate-100 pt-4">
+              {isAuthenticated ? (
+                <>
+                  <p className="px-3 pb-2 text-sm font-semibold text-slate-900">Hello, {user.name}</p>
+                  <Link to="/profile" className="block rounded-lg px-3 py-3 text-sm text-slate-700 hover:bg-slate-50" onClick={() => setMenuOpen(false)}>My Profile</Link>
+                  <Link to="/my-bookings" className="block rounded-lg px-3 py-3 text-sm text-slate-700 hover:bg-slate-50" onClick={() => setMenuOpen(false)}>My Bookings</Link>
+                  <button type="button" onClick={handleLogout} className="flex w-full items-center gap-2 rounded-lg px-3 py-3 text-left text-sm font-medium text-red-700 hover:bg-red-50"><LogOut size={16} />Logout</button>
+                </>
+              ) : (
+                <div className="flex gap-3">
+                  <Link to="/login" className="flex-1 rounded-lg border border-slate-200 px-4 py-2.5 text-center text-sm font-semibold text-slate-700" onClick={() => setMenuOpen(false)}>Sign In</Link>
+                  <Link to="/register" className="flex-1 rounded-lg bg-emerald-700 px-4 py-2.5 text-center text-sm font-semibold text-white" onClick={() => setMenuOpen(false)}>Sign Up</Link>
+                </div>
+              )}
             </div>
           </div>
         </nav>

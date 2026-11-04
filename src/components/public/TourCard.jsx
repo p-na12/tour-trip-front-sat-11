@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 export default function TourCard({ tour }) {
   return (
     <article className="overflow-hidden rounded-2xl border border-emerald-600 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      <Link to={`/tours/${tour.slug}`} className="block overflow-hidden">
+      <Link to={`/tours/${tour.slug}`} className="group block overflow-hidden">
         <img
           src={tour.image}
           alt={tour.title}
           loading="lazy"
-          className="h-48 w-full object-cover transition duration-500 hover:scale-105"
+          className="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
         />
       </Link>
       <div className="p-5">

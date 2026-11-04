@@ -165,7 +165,7 @@ export default function DestinationPage() {
   const recommendedTours = [
     ...destinationTours,
     ...publicTours.filter((tour) => tour.destination !== destination.name),
-  ].slice(0, 4);
+  ];
 
   return (
    <main className="w-full min-w-0 min-h-screen bg-[#f7f8fc] pb-12">

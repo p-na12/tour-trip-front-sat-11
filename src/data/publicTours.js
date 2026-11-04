@@ -3,6 +3,78 @@ import angkorGallery from "../assets/images/trips/angkor-gallery(1).jpg";
 import siemReapCity from "../assets/images/trips/Arrival & Siem Reap City.jpg";
 import tonleLake from "../assets/images/trips/tonle-lake(1).jpg";
 import phnomPenh from "../assets/images/destinations/phnomPenh.jpg";
+import kirirom from "../assets/images/tours/kirirom.jpg";
+import chisoMountain from "../assets/images/tours/Chiso_mountain.jpg";
+import mondulkiri from "../assets/images/tours/mondulkiri.jpg";
+import ratanakkiri from "../assets/images/tours/rotanakkiri.jpg";
+import kampotSunset from "../assets/images/tours/sunset_kpc.jpg";
+
+function createAdditionalTour({
+  id,
+  slug,
+  title,
+  category,
+  type,
+  destination,
+  duration,
+  price,
+  rating,
+  reviewCount,
+  image,
+  description,
+  itineraryTitle,
+  itineraryDescription,
+  activities,
+  highlights,
+  meetingPoint,
+}) {
+  return {
+    id,
+    slug,
+    title,
+    category,
+    type,
+    destination,
+    location: `${destination}, Cambodia`,
+    duration,
+    groupSize: "2–10 people",
+    rating,
+    reviewCount,
+    price,
+    description,
+    image,
+    images: [image],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: itineraryTitle,
+        location: destination,
+        time: "Morning to afternoon",
+        description: itineraryDescription,
+        image,
+        activities,
+      },
+    ],
+    highlights,
+    included: [
+      "English-speaking local guide",
+      "Air-conditioned transportation",
+      "Hotel pickup and drop-off",
+      "Drinking water",
+    ],
+    notIncluded: [
+      "Meals unless listed in the itinerary",
+      "Entrance fees",
+      "Personal expenses and gratuities",
+    ],
+    meetingPoint,
+    goodToKnow: [
+      "Wear comfortable shoes and bring sun protection.",
+      "Bring a little cash for meals and entrance fees.",
+      "The schedule may adjust to local weather conditions.",
+    ],
+  };
+}
 
 export const publicTours = [
   {
@@ -217,4 +289,111 @@ export const publicTours = [
       "Bring cash for entrance fees and market purchases.",
     ],
   },
+  ...[
+    {
+      id: "kirirom-forest",
+      slug: "kirirom-pine-forest-escape",
+      title: "Kirirom Pine Forest Escape",
+      category: "Nature",
+      type: "nature",
+      destination: "Kirirom, Kampong Speu",
+      duration: "Full day",
+      price: 58,
+      rating: 4.8,
+      reviewCount: 41,
+      image: kirirom,
+      description:
+        "Trade the city for cool mountain air, pine-scented trails, and peaceful viewpoints in Kirirom National Park.",
+      itineraryTitle: "Pines and mountain viewpoints",
+      itineraryDescription:
+        "Explore Kirirom's highland forest with a local guide, stopping at scenic overlooks and quiet nature trails.",
+      activities: ["Walk beneath the pine trees", "Visit scenic viewpoints", "Enjoy a countryside picnic stop"],
+      highlights: ["Breathe in the cool mountain air", "Explore Kirirom's pine forest trails", "Take in panoramic highland views"],
+      meetingPoint: "Hotel pickup in Phnom Penh",
+    },
+    {
+      id: "chiso-mountain",
+      slug: "chiso-mountain-heritage-day-trip",
+      title: "Chiso Mountain Heritage Day Trip",
+      category: "Cultural",
+      type: "culture",
+      destination: "Takeo",
+      duration: "Full day",
+      price: 49,
+      rating: 4.7,
+      reviewCount: 36,
+      image: chisoMountain,
+      description:
+        "Climb to an ancient hilltop temple and discover the countryside, history, and wide-open views of Takeo Province.",
+      itineraryTitle: "Ancient temple on the hill",
+      itineraryDescription:
+        "Visit Phnom Chisor with a local guide and take time to explore the temple complex and surrounding countryside.",
+      activities: ["Climb to Phnom Chisor", "Explore the historic temple grounds", "Stop at local countryside viewpoints"],
+      highlights: ["Discover a hilltop Khmer temple", "See the Takeo countryside from above", "Learn about the area's history with a local guide"],
+      meetingPoint: "Hotel pickup in Phnom Penh",
+    },
+    {
+      id: "mondulkiri-highlands",
+      slug: "mondulkiri-highlands-waterfall",
+      title: "Mondulkiri Highlands & Waterfall",
+      category: "Adventure",
+      type: "adventure",
+      destination: "Mondulkiri",
+      duration: "2 days / 1 night",
+      price: 129,
+      rating: 4.9,
+      reviewCount: 52,
+      image: mondulkiri,
+      description:
+        "Venture into Cambodia's eastern highlands for misty landscapes, forest paths, and refreshing waterfall scenery.",
+      itineraryTitle: "Highland trails and waterfall",
+      itineraryDescription:
+        "Discover the rolling landscape around Sen Monorom, visiting a local waterfall and scenic highland viewpoints.",
+      activities: ["Walk a forest trail", "Visit a local waterfall", "Explore Sen Monorom viewpoints"],
+      highlights: ["Experience Cambodia's cool eastern highlands", "Visit a scenic forest waterfall", "Enjoy quiet countryside viewpoints"],
+      meetingPoint: "Sen Monorom town center",
+    },
+    {
+      id: "ratanakiri-lake",
+      slug: "ratanakiri-lake-and-forest-discovery",
+      title: "Ratanakiri Lake & Forest Discovery",
+      category: "Nature",
+      type: "nature",
+      destination: "Ratanakiri",
+      duration: "Full day",
+      price: 74,
+      rating: 4.8,
+      reviewCount: 29,
+      image: ratanakkiri,
+      description:
+        "Explore the forested northeast and unwind beside Ratanakiri's volcanic lake on a relaxed guided day trip.",
+      itineraryTitle: "Volcanic lake and forest paths",
+      itineraryDescription:
+        "Spend the day discovering the scenery around Banlung, with time at the lake and gentle walks through the surrounding greenery.",
+      activities: ["Visit Yeak Laom volcanic lake", "Walk a shaded forest path", "Discover Banlung's local scenery"],
+      highlights: ["Swim or relax beside a volcanic lake", "Explore Ratanakiri's lush landscapes", "Take an easy-paced day in the northeast"],
+      meetingPoint: "Banlung town center",
+    },
+    {
+      id: "kampot-sunset",
+      slug: "kampot-riverside-sunset-and-pepper-farm",
+      title: "Kampot Riverside Sunset & Pepper Farm",
+      category: "Food & Culture",
+      type: "culture",
+      destination: "Kampot",
+      duration: "Full day",
+      price: 62,
+      rating: 4.9,
+      reviewCount: 47,
+      image: kampotSunset,
+      description:
+        "Pair Kampot's countryside flavors with a laid-back riverside evening and a memorable sunset over the landscape.",
+      itineraryTitle: "Pepper country to golden hour",
+      itineraryDescription:
+        "Visit a local pepper farm, enjoy time in Kampot town, and finish the day beside the river as the sun sets.",
+      activities: ["Tour a Kampot pepper farm", "Explore the riverside town", "Watch sunset over the countryside"],
+      highlights: ["Taste Kampot's famous pepper", "Meet local producers", "End the day with a riverside sunset"],
+      meetingPoint: "Kampot town center",
+    },
+  ].map(createAdditionalTour),
 ];
