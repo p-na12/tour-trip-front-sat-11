@@ -24,20 +24,23 @@ const ReviewsPage = () => {
                         label="Customer"
                         value="John Doe"
                     />
+
                     <ReviewRow
                         label="Tour"
                         value="Angkor Wat Sunrise"
                     />
+
                     <ReviewRow
                         label="Rating"
                         value="5 / 5"
                     />
-x
+
                     <ReviewRow
                         label="Status"
                         value="Published"
                     />
                 </ReviewCard>
+
                 <ReviewCard
                     title="Customer Feedback"
                     icon={MessageSquare}
@@ -46,6 +49,7 @@ x
                         label="Comment"
                         value="Amazing experience!"
                     />
+
                     <ReviewRow
                         label="Date"
                         value="11 Sep 2026"

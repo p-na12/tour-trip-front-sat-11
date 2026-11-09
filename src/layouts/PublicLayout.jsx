@@ -4,7 +4,7 @@ import PublicNavbar from "../components/public/Navbar";
 
 export default function PublicLayout() {
   const { pathname } = useLocation();
-  const showFooter = !["/login", "/register", "/forgot-password"].includes(pathname);
+  const showFooter = !["/login", "/register", "/forgot-password", "/profile"].includes(pathname);
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-50">
