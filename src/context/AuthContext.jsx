@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CheckCircle2, CircleAlert, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { AuthContext } from "./auth";
 
 const USERS_KEY = "tour-trip-users";
@@ -20,6 +21,7 @@ function readCurrentUser() {
 }
 
 export function AuthProvider({ children }) {
+  const { t } = useTranslation();
   const [users, setUsers] = useState(() => readStorage(USERS_KEY, []));
   const [user, setUser] = useState(readCurrentUser);
   const [bookings, setBookings] = useState(() => readStorage(BOOKINGS_KEY, []));
@@ -46,7 +48,7 @@ export function AuthProvider({ children }) {
   const register = (formData) => {
     const email = formData.email.trim().toLowerCase();
     if (users.some((existingUser) => existingUser.email === email)) {
-      return { error: "An account with this email already exists." };
+      return { error: t("auth.accountExists") };
     }
 
     const newUser = {
@@ -67,7 +69,7 @@ export function AuthProvider({ children }) {
         existingUser.password === password,
     );
     if (!account) {
-      return { error: "The email or password you entered is incorrect." };
+      return { error: t("auth.invalidCredentials") };
     }
 
     const safeUser = {
@@ -92,7 +94,7 @@ export function AuthProvider({ children }) {
       (existingUser) => existingUser.email === normalizedEmail,
     );
     if (!accountExists) {
-      return { error: "No account was found with that email address." };
+      return { error: t("auth.noAccountFound") };
     }
 
     setUsers((currentUsers) =>
@@ -173,7 +175,7 @@ export function AuthProvider({ children }) {
           <button
             type="button"
             className="text-slate-400 hover:text-slate-700"
-            aria-label="Dismiss notification"
+            aria-label={t("common.dismissNotification")}
             onClick={() => setToast(null)}
           >
             <X size={17} />

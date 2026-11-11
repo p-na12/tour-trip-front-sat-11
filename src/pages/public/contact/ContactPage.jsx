@@ -1,4 +1,5 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import phnomSomPov from "../../../assets/images/common/phnom_som_pov.jpg";
 
 const fieldClassName =
@@ -27,53 +28,55 @@ function ContactCard({ icon: Icon, title, children, href }) {
   );
 }
 
-function handleSubmit(event) {
+function handleSubmit(event, t) {
   event.preventDefault();
 
   const formData = new FormData(event.currentTarget);
   const body = [
-    `Name: ${formData.get("name")}`,
-    `Email: ${formData.get("email")}`,
-    `Phone: ${formData.get("phone") || "Not provided"}`,
-    `Interested destination: ${formData.get("destination") || "Not specified"}`,
+    `${t("contact.fullName")}: ${formData.get("name")}`,
+    `${t("contact.emailAddress")}: ${formData.get("email")}`,
+    `${t("contact.phoneNumber")}: ${formData.get("phone") || t("contact.notProvided")}`,
+    `${t("contact.interestedDestination")}: ${formData.get("destination") || t("contact.notSpecified")}`,
     "",
     formData.get("message"),
   ].join("\n");
 
   window.location.href = `mailto:hello@tour-trip.com?subject=${encodeURIComponent(
-    "Travel enquiry",
+    t("contact.travelSubject"),
   )}&body=${encodeURIComponent(body)}`;
 }
 
 export default function ContactPage() {
+  const { t } = useTranslation();
+
   return (
     <main className="min-w-0 flex-1 bg-white">
       <section className="mx-auto w-full max-w-7xl px-4 pb-10 pt-8 sm:px-6 sm:pb-12 sm:pt-10 lg:px-8">
         <header className="mb-7">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Contact Us
+            {t("contact.heading")}
           </h1>
           <p className="mt-2 text-sm leading-6 text-slate-600 sm:text-base">
-            Planning a trip or have a question? Our team would be happy to help.
+            {t("contact.subheading")}
           </p>
         </header>
 
         <div className="grid gap-4 sm:grid-cols-3">
           <ContactCard
             icon={Mail}
-            title="Email"
+            title={t("contact.email")}
             href="mailto:hello@tour-trip.com"
           >
             hello@tour-trip.com
           </ContactCard>
           <ContactCard
             icon={Phone}
-            title="Call us"
+            title={t("contact.callUs")}
             href="tel:+85512345678"
           >
             +855 12 345 678
           </ContactCard>
-          <ContactCard icon={MapPin} title="Based in">
+          <ContactCard icon={MapPin} title={t("contact.basedIn")}>
             Phnom Penh, Cambodia
           </ContactCard>
         </div>
@@ -84,7 +87,7 @@ export default function ContactPage() {
           <div className="relative isolate flex min-w-0 min-h-[300px] items-end overflow-hidden bg-slate-900 sm:min-h-[380px] lg:min-h-[500px]">
             <img
               src={phnomSomPov}
-              alt="Green Cambodian countryside surrounding Phnom Som Pov"
+              alt={t("contact.countrysideAlt")}
               className="absolute inset-0 -z-20 h-full w-full object-cover"
             />
             <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/90 via-slate-950/15 to-transparent" />
@@ -94,50 +97,48 @@ export default function ContactPage() {
                 Battambang · Phnom Sampeau
               </span>
               <h2 className="mt-4 max-w-md text-2xl font-bold leading-tight sm:text-3xl">
-                Explore Authentic Cambodia With Local Guides
+                {t("contact.storyTitle")}
               </h2>
               <p className="mt-2 max-w-md text-sm leading-6 text-white/85">
-                Personalized packages across Angkor, pristine rural plains, and
-                southern coastal getaways.
+                {t("contact.storyText")}
               </p>
             </div>
           </div>
 
           <div className="min-w-0 p-6 sm:p-8 lg:p-10">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-              Send us a Message
+              {t("contact.sendMessage")}
             </h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">
-              Fill out the form below and one of our travel advisors will reply
-              within 24 hours.
+              {t("contact.sendMessageText")}
             </p>
 
-            <form className="mt-7" onSubmit={handleSubmit}>
+            <form className="mt-7" onSubmit={(event) => handleSubmit(event, t)}>
               <div className="grid min-w-0 gap-x-4 gap-y-5 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
                 <label className="block min-w-0 text-xs font-semibold uppercase tracking-wide text-slate-700">
-                  Full name
+                  {t("contact.fullName")}
                   <input
                     className={fieldClassName}
                     type="text"
                     name="name"
-                    placeholder="John Doe"
+                    placeholder={t("contact.fullName")}
                     autoComplete="name"
                     required
                   />
                 </label>
                 <label className="block min-w-0 text-xs font-semibold uppercase tracking-wide text-slate-700">
-                  Email address
+                  {t("contact.emailAddress")}
                   <input
                     className={fieldClassName}
                     type="email"
                     name="email"
-                    placeholder="john@example.com"
+                    placeholder={t("contact.emailAddress")}
                     autoComplete="email"
                     required
                   />
                 </label>
                 <label className="block min-w-0 text-xs font-semibold uppercase tracking-wide text-slate-700">
-                  Phone number
+                  {t("contact.phoneNumber")}
                   <input
                     className={fieldClassName}
                     type="tel"
@@ -147,27 +148,27 @@ export default function ContactPage() {
                   />
                 </label>
                 <label className="block min-w-0 text-xs font-semibold uppercase tracking-wide text-slate-700">
-                  Interested destination
+                  {t("contact.interestedDestination")}
                   <select
                     className={fieldClassName}
                     name="destination"
                     defaultValue=""
                   >
-                    <option value="">Choose a destination</option>
-                    <option>Siem Reap &amp; Angkor Wat</option>
-                    <option>Phnom Penh</option>
-                    <option>Battambang</option>
-                    <option>Kampot &amp; Kep</option>
-                    <option>Koh Rong</option>
-                    <option>Other / not sure yet</option>
+                    <option value="">{t("contact.destinationPlaceholder")}</option>
+                    <option>{t("contact.destinationSiemReap")}</option>
+                    <option>{t("contact.destinationPhnomPenh")}</option>
+                    <option>{t("contact.destinationBattambang")}</option>
+                    <option>{t("contact.destinationKampot")}</option>
+                    <option>{t("contact.destinationKohRong")}</option>
+                    <option>{t("contact.other")}</option>
                   </select>
                 </label>
                 <label className="block min-w-0 text-xs font-semibold uppercase tracking-wide text-slate-700 sm:col-span-2">
-                  Your message
+                  {t("contact.message")}
                   <textarea
                     className={`${fieldClassName} min-h-32 resize-y`}
                     name="message"
-                    placeholder="Tell us about your group size, travel dates, and dream destinations..."
+                    placeholder={t("contact.messagePlaceholder")}
                     rows={4}
                     required
                   />
@@ -178,10 +179,10 @@ export default function ContactPage() {
                 className="mt-6 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
                 type="submit"
               >
-                Send Message
+                {t("contact.submit")}
               </button>
               <p className="mt-3 text-xs text-slate-500">
-                Submitting opens your email app with the message ready to send.
+                {t("contact.submitNote")}
               </p>
             </form>
           </div>

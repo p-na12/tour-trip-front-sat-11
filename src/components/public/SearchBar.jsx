@@ -1,11 +1,13 @@
 import { CalendarDays, Flag, MapPin, Search } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
   const [destination, setDestination] = useState("");
   const [tourType, setTourType] = useState("");
   const [date, setDate] = useState("");
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   function handleSearch(event) {
@@ -26,14 +28,14 @@ export default function SearchBar() {
       >
         <label className="min-w-0">
           <span className="mb-2 block text-xs font-semibold text-slate-700">
-            Destination
+            {t("common.destination")}
           </span>
           <span className="flex h-11 items-center gap-2.5 rounded-lg border border-slate-200 px-3 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-100">
             <MapPin size={17} className="shrink-0 text-emerald-700" />
             <input
               value={destination}
               onChange={(event) => setDestination(event.target.value)}
-              placeholder="Where to?"
+              placeholder={t("home.searchDestinationPlaceholder")}
               className="w-full min-w-0 bg-transparent text-sm text-slate-800 outline-none placeholder:text-slate-400"
             />
           </span>
@@ -41,7 +43,7 @@ export default function SearchBar() {
 
         <label className="min-w-0">
           <span className="mb-2 block text-xs font-semibold text-slate-700">
-            Tour Type
+            {t("common.tourType")}
           </span>
           <span className="flex h-11 items-center gap-2.5 rounded-lg border border-slate-200 px-3 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-100">
             <Flag size={17} className="shrink-0 text-emerald-700" />
@@ -50,17 +52,17 @@ export default function SearchBar() {
               onChange={(event) => setTourType(event.target.value)}
               className="w-full min-w-0 bg-transparent text-sm text-slate-700 outline-none"
             >
-              <option value="">All Types</option>
-              <option value="culture">Cultural & History</option>
-              <option value="nature">Nature & Relax</option>
-              <option value="city">Urban Explorer</option>
+              <option value="">{t("common.allTypes")}</option>
+              <option value="culture">{t("common.tourTypes.culture")}</option>
+              <option value="nature">{t("common.tourTypes.nature")}</option>
+              <option value="city">{t("common.tourTypes.city")}</option>
             </select>
           </span>
         </label>
 
         <label className="min-w-0">
           <span className="mb-2 block text-xs font-semibold text-slate-700">
-            Date
+            {t("common.date")}
           </span>
           <span className="flex h-11 items-center gap-2.5 rounded-lg border border-slate-200 px-3 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-100">
             <CalendarDays size={17} className="shrink-0 text-emerald-700" />
@@ -78,7 +80,7 @@ export default function SearchBar() {
           className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-emerald-700 px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:col-span-2 lg:col-span-1"
         >
           <Search size={16} />
-          Find Tours
+          {t("common.findTours")}
         </button>
       </form>
     </div>

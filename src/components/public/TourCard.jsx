@@ -1,13 +1,18 @@
 import { ArrowRight, Clock3, MapPin, Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { localizeTour } from "../../i18n/localizeContent";
 
 export default function TourCard({ tour }) {
+  const { t, i18n } = useTranslation();
+  const content = localizeTour(tour, i18n.resolvedLanguage || i18n.language);
+
   return (
     <article className="overflow-hidden rounded-2xl border border-emerald-600 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      <Link to={`/tours/${tour.slug}`} className="group block overflow-hidden">
+      <Link to={`/tours/${content.slug}`} className="group block overflow-hidden">
         <img
-          src={tour.image}
-          alt={tour.title}
+          src={content.image}
+          alt={content.title}
           loading="lazy"
           className="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
         />
@@ -16,15 +21,15 @@ export default function TourCard({ tour }) {
         <div className="flex items-center justify-between gap-3 text-xs text-slate-500">
           <span className="inline-flex items-center gap-1.5">
             <MapPin size={14} className="text-emerald-700" aria-hidden="true" />
-            {tour.location}
+            {content.location}
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Clock3 size={14} aria-hidden="true" />
-            {tour.duration}
+            {content.duration}
           </span>
         </div>
         <div className="mt-3 flex items-start justify-between gap-3">
-          <h3 className="text-lg font-semibold text-slate-900">{tour.title}</h3>
+          <h3 className="text-lg font-semibold text-slate-900">{content.title}</h3>
           <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-slate-700">
             <Star
               size={15}
@@ -36,16 +41,16 @@ export default function TourCard({ tour }) {
         </div>
         <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">
           <p className="text-sm text-slate-500">
-            From{" "}
+            {t("common.from")}{" "}
             <span className="text-lg font-bold text-slate-900">
-              ${tour.price}
+              ${content.price}
             </span>
           </p>
           <Link
-            to={`/tours/${tour.slug}`}
+            to={`/tours/${content.slug}`}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-700 hover:text-emerald-800"
           >
-            View tour <ArrowRight size={15} aria-hidden="true" />
+            {t("common.viewTour")} <ArrowRight size={15} aria-hidden="true" />
           </Link>
         </div>
       </div>

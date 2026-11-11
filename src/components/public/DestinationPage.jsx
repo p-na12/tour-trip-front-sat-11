@@ -7,10 +7,12 @@ import {
   Sun,
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import angkorWat from "../../assets/images/trips/Angkor-Wat(1).jpg";
 import tonleLake from "../../assets/images/trips/tonle-lake(1).jpg";
 import { publicDestinations } from "../../data/publicDestinations";
 import { publicTours } from "../../data/publicTours";
+import { localizeDestination, localizeTour } from "../../i18n/localizeContent";
 
 const travelTips = [
   {
@@ -57,47 +59,51 @@ function AttractionCard({ attraction, featured = false }) {
   );
 }
 
-function RecommendedTourCard({ tour }) {
+function RecommendedTourCard({ tour, language, t }) {
+  const content = localizeTour(tour, language);
   const destination = publicDestinations.find(
     (item) => item.name === tour.destination,
   );
+  const localizedDestination = destination
+    ? localizeDestination(destination, language)
+    : null;
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-emerald-600 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       <Link
-        to={`/tours/${tour.slug}`}
+        to={`/tours/${content.slug}`}
         className="relative block overflow-hidden"
       >
         <img
-          src={tour.image}
-          alt={tour.title}
+          src={content.image}
+          alt={content.title}
           loading="lazy"
           className="h-44 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-48"
         />
         <span className="absolute right-3 top-3 rounded-lg bg-white/95 px-2.5 py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
-          {destination?.category ?? tour.destination}
+          {localizedDestination?.category ?? content.destination}
         </span>
       </Link>
       <div className="p-4 sm:p-5">
         <Link
-          to={`/tours/${tour.slug}`}
+          to={`/tours/${content.slug}`}
           className="line-clamp-1 text-lg font-semibold text-slate-900 hover:text-emerald-700"
         >
-          {tour.title}
+          {content.title}
         </Link>
         <div className="mt-2 flex items-center gap-2 text-sm text-slate-600">
           <Clock3 size={15} className="shrink-0" aria-hidden="true" />
-          <span>{tour.duration}</span>
+          <span>{content.duration}</span>
           <span aria-hidden="true">·</span>
-          <span className="capitalize">{tour.type}</span>
+          <span className="capitalize">{t(`common.tourTypes.${tour.type}`, { defaultValue: content.category })}</span>
         </div>
         <div className="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
-          <span className="text-xl font-bold text-red-600">${tour.price}</span>
+          <span className="text-xl font-bold text-red-600">${content.price}</span>
           <Link
-            to={`/tours/${tour.slug}`}
+            to={`/tours/${content.slug}`}
             className="shrink-0 rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-800"
           >
-            Booking
+            {t("common.booking")}
           </Link>
         </div>
       </div>
@@ -107,25 +113,30 @@ function RecommendedTourCard({ tour }) {
 
 export default function DestinationPage() {
   const { id } = useParams();
-  const destination = id
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
+  const sourceDestination = id
     ? publicDestinations.find((item) => item.id === id)
     : publicDestinations[0];
+  const destination = sourceDestination
+    ? localizeDestination(sourceDestination, language)
+    : null;
 
   if (!destination) {
     return (
       <main className="mx-auto flex min-h-[60vh] max-w-7xl flex-col items-center justify-center px-4 text-center">
         <MapPin size={36} className="text-emerald-700" aria-hidden="true" />
         <h1 className="mt-4 text-2xl font-bold text-slate-900">
-          Destination not found
+          {t("destination.notFound")}
         </h1>
         <p className="mt-2 text-slate-600">
-          Choose a destination to start planning your trip.
+          {t("destination.notFoundText")}
         </p>
         <Link
           to="/destinations"
           className="mt-5 inline-flex items-center gap-2 rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-800"
         >
-          Browse destinations <ArrowRight size={16} aria-hidden="true" />
+          {t("destination.browseDestinations")} <ArrowRight size={16} aria-hidden="true" />
         </Link>
       </main>
     );
@@ -135,36 +146,34 @@ export default function DestinationPage() {
     destination.id === "siem-reap"
       ? [
           {
-            title: "Angkor Wat",
-            description:
-              "Watch the morning light fall across Cambodia's iconic temple complex.",
+            title: t("destination.angkorWat"),
+            description: t("destination.angkorWatDescription"),
             image: angkorWat,
           },
           {
-            title: "Tonlé Sap Floating Village",
-            description:
-              "Discover a remarkable lakeside way of life just outside the city.",
+            title: t("destination.tonleSapVillage"),
+            description: t("destination.tonleSapDescription"),
             image: tonleLake,
           },
         ]
       : [
           {
-            title: `Explore ${destination.name}`,
+            title: t("destination.exploreDestination", { destination: destination.name }),
             description: destination.description,
             image: destination.image,
           },
           {
-            title: `${destination.category} experiences`,
-            description: `Take time to enjoy the landscapes and local character of ${destination.name}.`,
+            title: t("destination.destinationExperiences", { category: destination.category }),
+            description: t("destination.localCharacter", { destination: destination.name }),
             image: destination.image,
           },
         ];
   const destinationTours = publicTours.filter(
-    (tour) => tour.destination === destination.name,
+    (tour) => tour.destination === sourceDestination.name,
   );
   const recommendedTours = [
     ...destinationTours,
-    ...publicTours.filter((tour) => tour.destination !== destination.name),
+    ...publicTours.filter((tour) => tour.destination !== sourceDestination.name),
   ];
 
   return (
@@ -197,13 +206,13 @@ export default function DestinationPage() {
               id="attractions-heading"
               className="text-xl font-bold text-slate-900"
             >
-              Top Attractions
+              {t("destination.topAttractions")}
             </h2>
             <a
               href="#recommended-tours"
               className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-800 hover:text-emerald-900"
             >
-              Explore more <ArrowRight size={14} aria-hidden="true" />
+              {t("destination.exploreMore")} <ArrowRight size={14} aria-hidden="true" />
             </a>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -227,29 +236,29 @@ export default function DestinationPage() {
               id="recommended-tours-heading"
               className="text-xl font-bold text-slate-900"
             >
-              Recommended Tours
+              {t("destination.recommendedTours")}
             </h2>
             <Link
               to="/tours"
               className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-800 hover:text-emerald-900"
             >
-              See all <ArrowRight size={14} aria-hidden="true" />
+              {t("destination.seeAll")} <ArrowRight size={14} aria-hidden="true" />
             </Link>
           </div>
           {recommendedTours.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {recommendedTours.map((tour) => (
-                <RecommendedTourCard key={tour.id} tour={tour} />
+                <RecommendedTourCard key={tour.id} tour={tour} language={language} t={t} />
               ))}
             </div>
           ) : (
             <p className="rounded-xl bg-white px-4 py-6 text-sm text-slate-600">
-              There are no tours listed for {destination.name} yet.{" "}
+              {t("destination.noToursForDestination", { destination: destination.name })}{" "}
               <Link
                 to="/tours"
                 className="font-semibold text-emerald-800 hover:underline"
               >
-                Browse all tours
+                {t("destination.browseAllTours")}
               </Link>
               .
             </p>
@@ -261,10 +270,10 @@ export default function DestinationPage() {
             id="travel-tips-heading"
             className="mb-4 text-center text-xl font-bold text-slate-900"
           >
-            Essential Travel Tips
+            {t("destination.essentialTravelTips")}
           </h2>
           <div className="grid gap-3 sm:grid-cols-3">
-            {travelTips.map(({ title, description, icon: Icon, iconClass }) => (
+            {travelTips.map(({ title, description, icon: Icon, iconClass }, index) => (
               <article
                 key={title}
                 className="rounded-xl border border-emerald-600 bg-white px-5 py-5 text-center shadow-sm"
@@ -275,10 +284,10 @@ export default function DestinationPage() {
                   <Icon size={20} aria-hidden="true" />
                 </span>
                 <h3 className="mt-3 text-sm font-semibold text-slate-900">
-                  {title}
+                  {t(["destination.bestTimeToVisit", "destination.dressCode", "destination.currency"][index])}
                 </h3>
                 <p className="mx-auto mt-1 max-w-xs text-xs leading-5 text-slate-600">
-                  {description}
+                  {t(["destination.bestTimeDescription", "destination.dressCodeDescription", "destination.currencyDescription"][index])}
                 </p>
               </article>
             ))}

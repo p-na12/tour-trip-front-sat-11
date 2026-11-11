@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Menu, Search, Bell, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { useMobileSidebar, cx } from "./Sidebar";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 /**
  * Dashboard top bar: search, notifications, profile trigger (dropdown-ready).
  * @param {{ className?: string, userName?: string, userRole?: string }} props
  */
 export function Topbar({ className, userName = "Sok Dara", userRole = "Administrator" }) {
+  const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [, setMobileOpen] = useMobileSidebar();
 
@@ -22,7 +25,7 @@ export function Topbar({ className, userName = "Sok Dara", userRole = "Administr
       <button
         type="button"
         onClick={() => setMobileOpen(true)}
-        aria-label="Open sidebar"
+        aria-label={t("admin.openSidebar")}
         className="shrink-0 rounded-lg p-2 text-slate-500 transition-colors duration-200 hover:bg-slate-100 hover:text-slate-900 md:hidden"
       >
         <Menu size={20} />
@@ -36,7 +39,7 @@ export function Topbar({ className, userName = "Sok Dara", userRole = "Administr
         />
         <input
           type="search"
-          placeholder="Search tours, bookings, customers..."
+          placeholder={t("admin.searchPlaceholder")}
           className={cx(
             "h-10 w-full rounded-full border border-slate-300 bg-slate-100/80 pl-9 pr-4 text-sm text-slate-900",
             "placeholder:text-slate-500 outline-none",
@@ -50,7 +53,7 @@ export function Topbar({ className, userName = "Sok Dara", userRole = "Administr
         {/* Notifications */}
         <button
           type="button"
-          aria-label="Notifications"
+          aria-label={t("admin.notifications")}
           className="relative rounded-full p-2 text-slate-500 transition-colors duration-200 hover:bg-slate-100 hover:text-slate-900 md:p-2.5"
         >
           <Bell size={18} />
@@ -93,11 +96,12 @@ export function Topbar({ className, userName = "Sok Dara", userRole = "Administr
                 transition={{ duration: 0.16, ease: "easeOut" }}
                 className="absolute right-0 z-50 mt-2 w-48 rounded-xl border border-slate-200 bg-white p-2 text-slate-900 shadow-lg"
               >
-                <p className="px-2 py-1.5 text-xs text-slate-500">Menu items coming soon</p>
+                <p className="px-2 py-1.5 text-xs text-slate-500">{t("admin.menuComingSoon")}</p>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
+        <LanguageSwitcher className="ml-1" />
       </div>
     </header>
   );

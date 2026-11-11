@@ -5,10 +5,12 @@ import {
   FaYoutube,
   FaXTwitter,
 } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function PublicFooter() {
   const currentYear = new Date().getFullYear();
+  const { t } = useTranslation();
 
   return (
     <footer className="bg-[#0b2347] text-white">
@@ -21,7 +23,7 @@ export default function PublicFooter() {
             <Link to="/" className="flex items-center gap-3">
               {/* Replace this with your logo image if you have one */}
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white">
-                <img className="rounded-full" src="https://i.pinimg.com/736x/33/1d/f1/331df1662cb1553dad983c1821cca1d0.jpg" alt="" />
+                <img className="rounded-full" src="https://i.pinimg.com/736x/33/1d/f1/331df1662cb1553dad983c1821cca1d0.jpg" alt="Tour-Trip" />
               </div>
 
               <span className="text-2xl font-bold">
@@ -30,8 +32,7 @@ export default function PublicFooter() {
             </Link>
 
             <p className="mt-5 max-w-sm text-sm leading-6 text-slate-300">
-              Explore amazing destinations, create unforgettable memories,
-              and enjoy your journey with Tour-Trip.
+              {t("footer.newsletterText")}
             </p>
 
             {/* SOCIAL MEDIA */}
@@ -72,7 +73,7 @@ export default function PublicFooter() {
           {/* COMPANY */}
           <div>
             <h3 className="text-lg font-bold text-white">
-              Company
+              {t("footer.company")}
             </h3>
 
             <div className="mt-5 flex flex-col gap-3 text-sm text-slate-300">
@@ -80,28 +81,28 @@ export default function PublicFooter() {
                 to="/about"
                 className="transition hover:text-emerald-400"
               >
-                About Us
+                {t("footer.aboutUs")}
               </Link>
 
               <Link
                 to="/tours"
                 className="transition hover:text-emerald-400"
               >
-                Our Services
+                {t("footer.ourServices")}
               </Link>
 
               <a
                 href="#"
                 className="transition hover:text-emerald-400"
               >
-                Careers
+                {t("footer.careers")}
               </a>
 
               <a
                 href="#"
                 className="transition hover:text-emerald-400"
               >
-                Blog
+                {t("footer.blog")}
               </a>
             </div>
           </div>
@@ -109,7 +110,7 @@ export default function PublicFooter() {
           {/* SUPPORT */}
           <div>
             <h3 className="text-lg font-bold text-white">
-              Support
+              {t("footer.support")}
             </h3>
 
             <div className="mt-5 flex flex-col gap-3 text-sm text-slate-300">
@@ -117,28 +118,28 @@ export default function PublicFooter() {
                 href="#"
                 className="transition hover:text-emerald-400"
               >
-                FAQ
+                {t("footer.faq")}
               </a>
 
               <a
                 href="#"
                 className="transition hover:text-emerald-400"
               >
-                Terms & Conditions
+                {t("footer.terms")}
               </a>
 
               <a
                 href="#"
                 className="transition hover:text-emerald-400"
               >
-                Privacy Policy
+                {t("footer.privacy")}
               </a>
 
               <Link
                 to="/contact"
                 className="transition hover:text-emerald-400"
               >
-                Contact Us
+                {t("footer.contactUs")}
               </Link>
             </div>
           </div>
@@ -146,18 +147,13 @@ export default function PublicFooter() {
           {/* DESTINATIONS */}
           <div>
             <h3 className="text-lg font-bold text-white">
-              Popular Destinations
+              {t("footer.popularDestinations")}
             </h3>
 
             <div className="mt-5 flex flex-col gap-3">
-              {[
-                "Siem Reap",
-                "Phnom Penh",
-                "Sihanoukville",
-                "Kampot",
-              ].map((destination) => (
+              {["destinationSiemReap", "destinationPhnomPenh", "destinationSihanoukville", "destinationKampot"].map((key) => (
                 <Link
-                  key={destination}
+                  key={key}
                   to="/destinations"
                   className="group flex items-center gap-2 text-sm text-slate-300 transition hover:text-emerald-400"
                 >
@@ -166,7 +162,7 @@ export default function PublicFooter() {
                     className="shrink-0 text-red-400 transition group-hover:text-emerald-400"
                   />
 
-                  {destination}
+                  {t(`footer.${key}`)}
                 </Link>
               ))}
             </div>
@@ -175,12 +171,11 @@ export default function PublicFooter() {
           {/* NEWSLETTER */}
           <div>
             <h3 className="text-lg font-bold text-white">
-              Newsletter
+              {t("footer.newsletter")}
             </h3>
 
             <p className="mt-5 max-w-sm text-sm leading-6 text-slate-300">
-              Subscribe to get the latest tours, travel tips, and special
-              offers.
+              {t("footer.newsletterText")}
             </p>
 
             <form
@@ -196,8 +191,8 @@ export default function PublicFooter() {
 
                   <input
                     type="email"
-                    placeholder="Your email"
-                    aria-label="Email address"
+                    placeholder={t("footer.emailPlaceholder")}
+                    aria-label={t("contact.emailAddress")}
                     className="min-w-0 flex-1 bg-transparent py-3 text-sm text-slate-900 outline-none placeholder:text-slate-400"
                   />
                 </div>
@@ -206,7 +201,7 @@ export default function PublicFooter() {
                   type="submit"
                   className="shrink-0 bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
                 >
-                  Subscribe
+                  {t("footer.subscribe")}
                 </button>
               </div>
             </form>
@@ -218,7 +213,7 @@ export default function PublicFooter() {
       <div className="border-t border-white/15">
         <div className="mx-auto flex max-w-[1300px] flex-col gap-4 px-5 py-5 text-xs text-slate-400 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <p>
-            © {currentYear} Tour-Trip. All rights reserved.
+            © {currentYear} Tour-Trip. {t("footer.rights")}
           </p>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
@@ -226,7 +221,7 @@ export default function PublicFooter() {
               href="#"
               className="transition hover:text-white"
             >
-              Privacy Policy
+              {t("footer.privacy")}
             </a>
 
             <span className="hidden h-4 w-px bg-white/20 sm:block" />
@@ -235,7 +230,7 @@ export default function PublicFooter() {
               href="#"
               className="transition hover:text-white"
             >
-              Terms & Conditions
+              {t("footer.terms")}
             </a>
 
             <span className="hidden h-4 w-px bg-white/20 sm:block" />
@@ -244,7 +239,7 @@ export default function PublicFooter() {
               href="#"
               className="transition hover:text-white"
             >
-              Site Map
+              {t("footer.contactUs")}
             </a>
           </div>
         </div>

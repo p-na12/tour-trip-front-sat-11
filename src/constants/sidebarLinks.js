@@ -19,29 +19,28 @@ import {
 
 /** @type {NavLinkItem[]} */
 export const sidebarLinks = [
-  { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
+  { label: "Dashboard", labelKey: "dashboard", path: "/admin", icon: LayoutDashboard },
   {
     label: "Manage Masters",
+    labelKey: "manageMasters",
     path: "/admin/masters",
     icon: LayoutGrid,
   },
   {
     label: "Manage Bookings",
+    labelKey: "manageBookings",
     path: "/admin/bookings",
     icon: CalendarCheck,
   },
-  { label: "Manage Categories", path: "/admin/categories", icon: LayoutGrid },
-  { label: "Tour Schedules", path: "/admin/schedules", icon: CalendarDays },
-  // { label: "Manage Masters", path: "/admin/masters", icon: LayoutGrid },
-  // { label: "Manage Bookings", path: "/admin/manageBooking", icon: CalendarCheck },
-  // { label :"Manage Categories",path: "/admin/categories",icon: LayoutGrid,},
-  { label: "Manage Customers", path: "/admin/customers", icon: Users },
-  { label: "Reports", path: "/admin/reports", icon: BarChart3 },
-  { label: "Reviews", path: "/admin/reviews", icon: Star },
+  { label: "Manage Categories", labelKey: "manageCategories", path: "/admin/categories", icon: LayoutGrid },
+  { label: "Tour Schedules", labelKey: "tourSchedules", path: "/admin/schedules", icon: CalendarDays },
+  { label: "Manage Customers", labelKey: "manageCustomers", path: "/admin/customers", icon: Users },
+  { label: "Reports", labelKey: "reports", path: "/admin/reports", icon: BarChart3 },
+  { label: "Reviews", labelKey: "reviews", path: "/admin/reviews", icon: Star },
 ];
 
 /** @type {NavLinkItem[]} */
 export const sidebarFooterLinks = [
-  { label: "System Settings", path: "/admin/settings", icon: Settings },
-  { label: "Logout", path: "/logout", icon: LogOut },
+  { label: "System Settings", labelKey: "systemSettings", path: "/admin/settings", icon: Settings },
+  { label: "Logout", labelKey: "logout", path: "/logout", icon: LogOut },
 ];

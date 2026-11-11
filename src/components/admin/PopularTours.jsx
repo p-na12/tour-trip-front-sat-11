@@ -1,13 +1,16 @@
 import { Doughnut } from "react-chartjs-2";
 import { POPULAR_TOURS } from "../../constants/dashboardOverviewData";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function PopularTours() {
+    const { t } = useTranslation();
+    const tourNameKeys = ["angkorSunrise", "mekongDelta", "kohRongIsland", "siemReapFood"];
     // Convert your POPULAR_TOURS data to Chart.js format
     const data = {
-        labels: POPULAR_TOURS.map((tour) => tour.name),
+        labels: POPULAR_TOURS.map((_, index) => t(`adminDashboard.${tourNameKeys[index]}`)),
 
         datasets: [
             {
@@ -64,10 +67,10 @@ export default function PopularTours() {
             {/* ================= HEADER ================= */}
             <div className="mb-4 flex items-center justify-between">
                 <div>
-                    <h3 className="text-lg font-bold text-slate-900">Popular Tours</h3>
+                    <h3 className="text-lg font-bold text-slate-900">{t("adminDashboard.popularTours")}</h3>
 
                     <p className="mt-1 text-xs text-slate-400">
-                        Most popular tour categories
+                        {t("adminDashboard.popularCategories")}
                     </p>
                 </div>
 
@@ -102,11 +105,11 @@ export default function PopularTours() {
                     <span className="text-3xl font-bold text-slate-900">42</span>
 
                     <span className="mt-1 text-xs font-medium text-slate-400">
-                        Active Tours
+                        {t("adminDashboard.activeTours")}
                     </span>
 
                     <span className="mt-1 text-[10px] font-semibold text-emerald-600">
-                        ↑ 8.4% this month
+                        {t("adminDashboard.thisMonthTrend")}
                     </span>
                 </div>
             </div>
@@ -150,7 +153,7 @@ export default function PopularTours() {
                             />
 
                             <span className="text-sm font-medium text-slate-600">
-                                {tour.name}
+                                {t(`adminDashboard.${tourNameKeys[idx]}`)}
                             </span>
                         </div>
 
@@ -178,7 +181,7 @@ export default function PopularTours() {
                     hover:text-teal-700
                 "
             >
-                View All Tours →
+                {t("adminDashboard.viewAllTours")} →
             </button>
         </div>
     );

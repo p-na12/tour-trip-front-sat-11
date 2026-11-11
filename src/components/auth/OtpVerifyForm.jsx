@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const OtpVerifyForm = ({ length = 6, onSubmit = () => {}, loading = false }) => {
+  const { t } = useTranslation()
   const [otp, setOtp] = useState(Array(length).fill(''))
   const inputRefs = useRef([])
 
@@ -61,7 +63,7 @@ const OtpVerifyForm = ({ length = 6, onSubmit = () => {}, loading = false }) => 
             inputMode="numeric"
             maxLength={1}
             value={digit}
-            aria-label={`OTP digit ${index + 1}`}
+            aria-label={t("auth.otpDigit", { index: index + 1 })}
             onChange={(event) => handleChange(event.target.value, index)}
             onKeyDown={(event) => handleKeyDown(event, index)}
             onPaste={handlePaste}
@@ -75,7 +77,7 @@ const OtpVerifyForm = ({ length = 6, onSubmit = () => {}, loading = false }) => 
         disabled={loading || otp.join('').length !== length}
         className="w-full rounded-lg bg-blue-900 px-6 py-3 font-semibold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {loading ? 'Verifying...' : 'Verify'}
+        {loading ? t("auth.verifying") : t("auth.verify")}
       </button>
     </form>
   )
