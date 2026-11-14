@@ -55,7 +55,15 @@ export default function PublicNavbar() {
               alt="Tour-Trip"
             />
           </div>
-          <span>Tour-Trip</span>
+          <span className="flex flex-col leading-tight">
+            <span style={{ fontFamily: '"Kantumruy Pro", "Segoe UI", sans-serif' }}>ដំណើរ</span>
+            <span
+              className="text-sm font-semibold text-slate-500"
+              style={{ fontFamily: '"Kantumruy Pro", "Segoe UI", sans-serif' }}
+            >
+              Tour-Trip
+            </span>
+          </span>
         </Link>
 
         <nav

@@ -103,7 +103,9 @@ export default function AboutPage() {
 
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-5 sm:px-6 sm:py-7 lg:px-8">
-      <section className="relative isolate overflow-hidden rounded-[22px] border border-green-600 bg-slate-950 shadow-[0_20px_50px_rgba(11,35,71,0.12)]">
+      <section
+        className="relative isolate overflow-hidden rounded-[22px] border border-green-600 bg-slate-950 shadow-[0_20px_50px_rgba(11,35,71,0.12)]"
+      >
         <img
           src={angkorWat}
           alt={t("contact.angkorSunsetAlt")}

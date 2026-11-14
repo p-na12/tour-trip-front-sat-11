@@ -325,7 +325,9 @@ export default function TourDetailPage() {
               <TourBookingCard tour={tour} />
             </div>
           </div>
-          <TourGallery tour={tour} />
+          <div>
+            <TourGallery tour={tour} />
+          </div>
         </section>
 
         <div className="mt-14 space-y-14 sm:mt-16">
@@ -426,8 +428,12 @@ export default function TourDetailPage() {
                 </Link>
               </div>
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {recommendedTours.map((recommendedTour) => (
-                  <TourCard key={recommendedTour.id} tour={recommendedTour} />
+                {recommendedTours.map((recommendedTour, index) => (
+                  <TourCard
+                    key={recommendedTour.id}
+                    tour={recommendedTour}
+                    index={index}
+                  />
                 ))}
               </div>
             </section>

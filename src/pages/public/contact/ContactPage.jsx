@@ -20,11 +20,18 @@ function ContactCard({ icon: Icon, title, children, href }) {
     "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 sm:p-6";
 
   return href ? (
-    <a href={href} className={className}>
+    <a
+      href={href}
+      className={className}
+    >
       {content}
     </a>
   ) : (
-    <div className={className}>{content}</div>
+    <div
+      className={className}
+    >
+      {content}
+    </div>
   );
 }
 
@@ -53,10 +60,14 @@ export default function ContactPage() {
     <main className="min-w-0 flex-1 bg-white">
       <section className="mx-auto w-full max-w-7xl px-4 pb-10 pt-8 sm:px-6 sm:pb-12 sm:pt-10 lg:px-8">
         <header className="mb-7">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          <h1
+            className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
+          >
             {t("contact.heading")}
           </h1>
-          <p className="mt-2 text-sm leading-6 text-slate-600 sm:text-base">
+          <p
+            className="mt-2 text-sm leading-6 text-slate-600 sm:text-base"
+          >
             {t("contact.subheading")}
           </p>
         </header>
@@ -84,7 +95,9 @@ export default function ContactPage() {
 
       <section className="bg-slate-50 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 ">
         <div className="mx-auto grid w-full max-w-[76rem] overflow-hidden rounded-2xl border border-green-600 bg-white shadow-sm lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-          <div className="relative isolate flex min-w-0 min-h-[300px] items-end overflow-hidden bg-slate-900 sm:min-h-[380px] lg:min-h-[500px]">
+          <div
+            className="relative isolate flex min-w-0 min-h-[300px] items-end overflow-hidden bg-slate-900 sm:min-h-[380px] lg:min-h-[500px]"
+          >
             <img
               src={phnomSomPov}
               alt={t("contact.countrysideAlt")}
@@ -105,7 +118,9 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="min-w-0 p-6 sm:p-8 lg:p-10">
+          <div
+            className="min-w-0 p-6 sm:p-8 lg:p-10"
+          >
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">
               {t("contact.sendMessage")}
             </h2>

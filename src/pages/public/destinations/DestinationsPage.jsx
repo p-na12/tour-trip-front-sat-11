@@ -12,8 +12,12 @@ export default function DestinationsPage() {
       description={t("destination.destinationsPageDescription")}
     >
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {publicDestinations.map((destination) => (
-          <DestinationCard key={destination.id} destination={destination} />
+        {publicDestinations.map((destination, index) => (
+          <DestinationCard
+            key={destination.id}
+            destination={destination}
+            index={index}
+          />
         ))}
       </div>
     </PublicPageFrame>

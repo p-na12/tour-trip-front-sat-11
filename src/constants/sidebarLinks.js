@@ -21,12 +21,6 @@ import {
 export const sidebarLinks = [
   { label: "Dashboard", labelKey: "dashboard", path: "/admin", icon: LayoutDashboard },
   {
-    label: "Manage Masters",
-    labelKey: "manageMasters",
-    path: "/admin/masters",
-    icon: LayoutGrid,
-  },
-  {
     label: "Manage Bookings",
     labelKey: "manageBookings",
     path: "/admin/bookings",

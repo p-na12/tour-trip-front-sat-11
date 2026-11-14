@@ -30,8 +30,8 @@ export default function ToursPage() {
     >
       {filteredTours.length ? (
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredTours.map((tour) => (
-            <TourCard key={tour.id} tour={tour} />
+          {filteredTours.map((tour, index) => (
+            <TourCard key={tour.id} tour={tour} index={index} />
           ))}
         </div>
       ) : (

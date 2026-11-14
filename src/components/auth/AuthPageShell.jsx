@@ -25,7 +25,10 @@ export default function AuthPageShell({ children }) {
             <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-emerald-300/70 bg-white/10 shadow-sm ring-2 ring-emerald-300/40">
               <img src={logoImage} alt="Tour-Trip" className="h-full w-full object-cover" />
             </div>
-            Tour-Trip
+            <div className="flex flex-col leading-tight">
+              <p style={{ fontFamily: '"Kantumruy Pro", "Segoe UI", sans-serif' }}>ដំណើរ</p>
+              <p>Tour-Trip</p>
+            </div>
           </Link>
 
           <div className="relative z-10 max-w-md">

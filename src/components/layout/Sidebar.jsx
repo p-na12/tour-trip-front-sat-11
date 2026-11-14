@@ -1,5 +1,5 @@
 import { useState, useEffect, useSyncExternalStore } from "react";
-import { Compass, PanelLeftClose, PanelLeftOpen, X } from "lucide-react";
+import { PanelLeftClose, PanelLeftOpen, X } from "lucide-react";
 import { LayoutGroup } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { sidebarLinks, sidebarFooterLinks } from "../../constants/sidebarLinks";
@@ -117,8 +117,12 @@ export function Sidebar({ className }) {
       >
         {/* Brand */}
         <div className="flex items-center gap-3 px-4 py-5">
-          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-indigo-600 text-white">
-            <Compass size={18} />
+          <span className="grid size-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-white ring-1 ring-slate-200 shadow-sm">
+            <img
+              src="https://i.pinimg.com/736x/33/1d/f1/331df1662cb1553dad983c1821cca1d0.jpg"
+              alt="Tour-Trip"
+              className="h-full w-full object-cover"
+            />
           </span>
           {!effectiveCollapsed && (
             <span className="truncate text-base font-semibold tracking-tight text-slate-900">

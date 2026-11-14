@@ -13,13 +13,19 @@ export default function Hero() {
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-amber-950/35 via-slate-950/55 to-slate-950/70" />
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-emerald-200 sm:text-sm">
+        <p
+          className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-emerald-200 sm:text-sm"
+        >
           {t("home.heroEyebrow")}
         </p>
-        <h1 className="mx-auto max-w-4xl text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+        <h1
+          className="mx-auto max-w-4xl text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+        >
           {t("home.heroTitle")}
         </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-sm leading-6 text-white/90 sm:text-base sm:leading-7">
+        <p
+          className="mx-auto mt-5 max-w-2xl text-sm leading-6 text-white/90 sm:text-base sm:leading-7"
+        >
           {t("home.heroDescription")}
         </p>
         <a

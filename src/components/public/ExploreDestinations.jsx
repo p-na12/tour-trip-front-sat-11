@@ -11,13 +11,19 @@ export default function ExploreDestinations() {
     <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
       <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
+          <p
+            className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700"
+          >
             {t("home.exploreEyebrow")}
           </p>
-          <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+          <h2
+            className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+          >
             {t("home.exploreTitle")}
           </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
+          <p
+            className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base"
+          >
             {t("home.exploreDescription")}
           </p>
         </div>
@@ -29,8 +35,12 @@ export default function ExploreDestinations() {
         </Link>
       </div>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {publicDestinations.map((destination) => (
-          <DestinationCard key={destination.id} destination={destination} />
+        {publicDestinations.map((destination, index) => (
+          <DestinationCard
+            key={destination.id}
+            destination={destination}
+            index={index}
+          />
         ))}
       </div>
     </section>

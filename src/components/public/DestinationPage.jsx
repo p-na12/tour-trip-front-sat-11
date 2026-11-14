@@ -6,6 +6,7 @@ import {
   Shirt,
   Sun,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import angkorWat from "../../assets/images/trips/Angkor-Wat(1).jpg";
@@ -35,12 +36,20 @@ const travelTips = [
   },
 ];
 
-function AttractionCard({ attraction, featured = false }) {
+function AttractionCard({ attraction, featured = false, index = 0 }) {
   return (
-    <article
+    <motion.article
       className={`group relative isolate flex min-h-64 overflow-hidden rounded-2xl border border-emerald-600 bg-slate-900 shadow-sm sm:min-h-72 ${
         featured ? "lg:col-span-2" : ""
       }`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 1.5,
+        ease: "easeInOut",
+        delay: (index % 3) * 0.2,
+      }}
     >
       <img
         src={attraction.image}
@@ -55,11 +64,11 @@ function AttractionCard({ attraction, featured = false }) {
           {attraction.description}
         </p>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
-function RecommendedTourCard({ tour, language, t }) {
+function RecommendedTourCard({ tour, language, t, index = 0 }) {
   const content = localizeTour(tour, language);
   const destination = publicDestinations.find(
     (item) => item.name === tour.destination,
@@ -69,45 +78,59 @@ function RecommendedTourCard({ tour, language, t }) {
     : null;
 
   return (
-    <article className="group overflow-hidden rounded-2xl border border-emerald-600 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      <Link
-        to={`/tours/${content.slug}`}
-        className="relative block overflow-hidden"
+    <motion.div
+      className="h-full"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 1.5,
+        ease: "easeInOut",
+        delay: (index % 3) * 0.2,
+      }}
+    >
+      <article
+        className="group overflow-hidden rounded-2xl border border-emerald-600 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
       >
-        <img
-          src={content.image}
-          alt={content.title}
-          loading="lazy"
-          className="h-44 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-48"
-        />
-        <span className="absolute right-3 top-3 rounded-lg bg-white/95 px-2.5 py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
-          {localizedDestination?.category ?? content.destination}
-        </span>
-      </Link>
-      <div className="p-4 sm:p-5">
         <Link
           to={`/tours/${content.slug}`}
-          className="line-clamp-1 text-lg font-semibold text-slate-900 hover:text-emerald-700"
+          className="relative block overflow-hidden"
         >
-          {content.title}
+          <img
+            src={content.image}
+            alt={content.title}
+            loading="lazy"
+            className="h-44 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-48"
+          />
+          <span className="absolute right-3 top-3 rounded-lg bg-white/95 px-2.5 py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
+            {localizedDestination?.category ?? content.destination}
+          </span>
         </Link>
-        <div className="mt-2 flex items-center gap-2 text-sm text-slate-600">
-          <Clock3 size={15} className="shrink-0" aria-hidden="true" />
-          <span>{content.duration}</span>
-          <span aria-hidden="true">·</span>
-          <span className="capitalize">{t(`common.tourTypes.${tour.type}`, { defaultValue: content.category })}</span>
-        </div>
-        <div className="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
-          <span className="text-xl font-bold text-red-600">${content.price}</span>
+        <div className="p-4 sm:p-5">
           <Link
             to={`/tours/${content.slug}`}
-            className="shrink-0 rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-800"
+            className="line-clamp-1 text-lg font-semibold text-slate-900 hover:text-emerald-700"
           >
-            {t("common.booking")}
+            {content.title}
           </Link>
+          <div className="mt-2 flex items-center gap-2 text-sm text-slate-600">
+            <Clock3 size={15} className="shrink-0" aria-hidden="true" />
+            <span>{content.duration}</span>
+            <span aria-hidden="true">·</span>
+            <span className="capitalize">{t(`common.tourTypes.${tour.type}`, { defaultValue: content.category })}</span>
+          </div>
+          <div className="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
+            <span className="text-xl font-bold text-red-600">${content.price}</span>
+            <Link
+              to={`/tours/${content.slug}`}
+              className="shrink-0 rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-800"
+            >
+              {t("common.booking")}
+            </Link>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </motion.div>
   );
 }
 
@@ -191,10 +214,14 @@ export default function DestinationPage() {
               <MapPin size={13} aria-hidden="true" />
               {destination.category}
             </span>
-            <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+            <h1
+              className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+            >
               {destination.name}
             </h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-white/90 sm:text-base">
+            <p
+              className="mt-2 max-w-2xl text-sm leading-6 text-white/90 sm:text-base"
+            >
               {destination.description}
             </p>
           </div>
@@ -221,6 +248,7 @@ export default function DestinationPage() {
                 key={attraction.title}
                 attraction={attraction}
                 featured={index === 0}
+                index={index}
               />
             ))}
           </div>
@@ -247,8 +275,14 @@ export default function DestinationPage() {
           </div>
           {recommendedTours.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {recommendedTours.map((tour) => (
-                <RecommendedTourCard key={tour.id} tour={tour} language={language} t={t} />
+              {recommendedTours.map((tour, index) => (
+                <RecommendedTourCard
+                  key={tour.id}
+                  tour={tour}
+                  language={language}
+                  t={t}
+                  index={index}
+                />
               ))}
             </div>
           ) : (

@@ -22,9 +22,9 @@ export function SidebarItem({ label, path, icon: Icon, isActive, collapsed = fal
       onClick={onClick}
       className={cx(
         "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium",
-        "transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-400",
+        "transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-emerald-400",
         isActive
-          ? "bg-indigo-50 text-indigo-600"
+          ? "bg-emerald-50 text-emerald-700"
           : "text-slate-600 hover:bg-slate-200/60 hover:text-slate-900",
       )}
     >
@@ -32,7 +32,7 @@ export function SidebarItem({ label, path, icon: Icon, isActive, collapsed = fal
       {isActive && layoutId && (
         <motion.span
           layoutId={layoutId}
-          className="absolute inset-0 rounded-xl bg-indigo-50 shadow-sm"
+          className="absolute inset-0 rounded-xl bg-emerald-50 shadow-sm"
           transition={{ type: "spring", stiffness: 350, damping: 30 }}
         />
       )}
@@ -41,7 +41,7 @@ export function SidebarItem({ label, path, icon: Icon, isActive, collapsed = fal
       {isActive && layoutId && (
         <motion.span
           layoutId={`${layoutId}-accent`}
-          className="absolute left-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-r-full bg-indigo-600"
+          className="absolute left-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-r-full bg-emerald-600"
           transition={{ type: "spring", stiffness: 350, damping: 30 }}
         />
       )}

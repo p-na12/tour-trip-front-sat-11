@@ -3,7 +3,6 @@ import { Menu, Search, Bell, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useMobileSidebar, cx } from "./Sidebar";
-import LanguageSwitcher from "../LanguageSwitcher";
 
 /**
  * Dashboard top bar: search, notifications, profile trigger (dropdown-ready).
@@ -44,7 +43,7 @@ export function Topbar({ className, userName = "Sok Dara", userRole = "Administr
             "h-10 w-full rounded-full border border-slate-300 bg-slate-100/80 pl-9 pr-4 text-sm text-slate-900",
             "placeholder:text-slate-500 outline-none",
             "transition-all duration-200 ease-out",
-            "focus:bg-white focus:shadow-md focus:ring-2 focus:ring-indigo-400/50",
+            "focus:bg-white focus:shadow-md focus:ring-2 focus:ring-emerald-400/50",
           )}
         />
       </div>
@@ -71,7 +70,7 @@ export function Topbar({ className, userName = "Sok Dara", userRole = "Administr
             aria-expanded={menuOpen}
             className="flex items-center gap-2 rounded-full py-1.5 pl-1.5 pr-2 transition-colors duration-200 hover:bg-slate-100 md:pr-3"
           >
-            <span className="grid size-8 place-items-center rounded-full bg-indigo-600 text-sm font-semibold text-white md:size-9">
+            <span className="grid size-8 place-items-center rounded-full bg-emerald-600 text-sm font-semibold text-white md:size-9">
               {userName.charAt(0)}
             </span>
             <span className="hidden text-left leading-tight sm:block">
@@ -101,7 +100,6 @@ export function Topbar({ className, userName = "Sok Dara", userRole = "Administr
             )}
           </AnimatePresence>
         </div>
-        <LanguageSwitcher className="ml-1" />
       </div>
     </header>
   );
