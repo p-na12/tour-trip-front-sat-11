@@ -67,7 +67,7 @@ export default function DestinationsPagination({
             CELL,
             'rounded-l-lg border-slate-200 bg-white text-slate-500',
             'transition-colors duration-150 hover:bg-slate-50 hover:text-slate-700',
-            'focus:z-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40',
+            'focus:z-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500/40',
             'disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white',
           ].join(' ')}
         >
@@ -85,9 +85,9 @@ export default function DestinationsPagination({
               className={[
                 CELL,
                 'font-semibold tabular-nums transition-colors duration-150',
-                'focus:z-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40',
+                'focus:z-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500/40',
                 item === currentPage
-                  ? 'z-10 border-indigo-600 bg-indigo-600 text-white'
+                  ? 'z-10 border-green-600 bg-green-600 text-white'
                   : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900',
               ].join(' ')}
             >
@@ -113,7 +113,7 @@ export default function DestinationsPagination({
             CELL,
             'rounded-r-lg border-slate-200 bg-white text-slate-500',
             'transition-colors duration-150 hover:bg-slate-50 hover:text-slate-700',
-            'focus:z-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40',
+            'focus:z-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500/40',
             'disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white',
           ].join(' ')}
         >

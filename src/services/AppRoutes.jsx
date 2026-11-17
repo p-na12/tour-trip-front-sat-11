@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import MastersTabs from "../components/common/MastersTabs";
 import CreateTour from "../components/tour/CreateTour";
@@ -32,6 +33,9 @@ import ToursPage from "../pages/public/tours/ToursPage";
 import TourDetailPage from "../pages/public/tours/TourDetailPage";
 import { AdminLayout } from "../layouts/AdminLayout";
 import PublicLayout from "../layouts/PublicLayout";
+import SystemSettings from "../pages/admin/settings/SystemSettings";
+
+const ReportsPage = lazy(() => import("../pages/admin/reports/ReportsPage"));
 
 export function AppRoutes() {
   return (
@@ -71,7 +75,7 @@ export function AppRoutes() {
         <Route path="guides" element={<GuidesPage />} />
         <Route path="reviews" element={<ReviewsPage />} />
         <Route path="schedules" element={<TourSchedules />} />
-        <Route path="settings" element={<Navigate to="/admin" replace />} />
+        <Route path="settings" element={<SystemSettings />} />
         <Route path="tours" element={<TourSchedules />} />
         <Route path="tours/create" element={<CreateTour />} />
 
@@ -92,7 +96,20 @@ export function AppRoutes() {
         />
         <Route path="masters/guides" element={<GuidesPage />} />
         <Route path="masters/schedules" element={<TourSchedules />} />
-        <Route path="reports" element={<Navigate to="/admin" replace />} />
+        <Route
+          path="reports"
+          element={
+            <Suspense
+              fallback={
+                <div className="p-6 text-sm font-medium text-slate-500">
+                  Loading reports...
+                </div>
+              }
+            >
+              <ReportsPage />
+            </Suspense>
+          }
+        />
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Route>
 

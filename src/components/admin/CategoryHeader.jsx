@@ -35,7 +35,7 @@ export default function CategoryHeader({ onSave, onCancel }) {
         <button
           type="button"
           onClick={onSave}
-          className="flex items-center gap-2 px-4 py-2 bg-emerald-700 text-white rounded-lg text-sm font-medium hover:bg-emerald-800 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-brand text-white rounded-lg text-sm font-medium hover:bg-brand-hover transition-colors"
         >
           <Save className="w-4 h-4" />
           Save Category

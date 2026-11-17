@@ -13,7 +13,7 @@ const Stepper = ({ step, furthestStep, onJump }) => {
                 x1="5%" y1="2"
                 x2={step === 1 ? "5%" : step === 2 ? "50%" : "95%"}
                 y2="2"
-                stroke="#0F766E" strokeWidth="2"
+                stroke="var(--color-brand)" strokeWidth="2"
                 className="flight-dash"
                 style={{ transition: "x2 0.4s cubic-bezier(0.16,1,0.3,1)" }}
               />
@@ -35,8 +35,8 @@ const Stepper = ({ step, furthestStep, onJump }) => {
                   <span
                     className={cx(
                       "w-10 h-10 rounded-full flex items-center justify-center text-[13px] font-semibold font-display transition-all duration-300 border-2",
-                      isCompleted && "bg-teal-700 border-teal-700 text-white",
-                      isActive && "bg-white border-teal-700 text-teal-700 ring-4 ring-teal-50",
+                      isCompleted && "bg-brand border-brand text-white",
+                      isActive && "bg-white border-brand text-brand ring-4 ring-brand/10",
                       !isCompleted && !isActive && "bg-white border-gray-200 text-gray-400"
                     )}
                   >
@@ -44,7 +44,7 @@ const Stepper = ({ step, furthestStep, onJump }) => {
                   </span>
                   <span className={cx(
                     "text-[12px] font-medium font-body whitespace-nowrap absolute top-12",
-                    isActive ? "text-teal-700" : isCompleted ? "text-gray-700" : "text-gray-400"
+                    isActive ? "text-brand" : isCompleted ? "text-gray-700" : "text-gray-400"
                   )}>
                     {label}
                   </span>

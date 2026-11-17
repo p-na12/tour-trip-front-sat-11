@@ -211,10 +211,10 @@ export default function MonthlyIncomeChart() {
                 <div
                     className="
                         rounded-full
-                        bg-emerald-50
+                        bg-green-50
                         px-3 py-1
                         text-xs font-semibold
-                        text-emerald-600
+                        text-green-600
                     "
                 >
                     ↑ 15.2%

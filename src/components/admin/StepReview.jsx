@@ -21,13 +21,13 @@ const StepReview = ({ data, confirmed, setConfirmed, onEdit }) => {
               <p className="text-[12.5px] text-gray-500 font-body">{data.email || "No email provided"}</p>
             </div>
     
-            <div className="bg-teal-50/70 border border-teal-100 rounded-xl p-5">
+            <div className="bg-brand/5 border border-brand/10 rounded-xl p-5">
               <label className="flex items-start gap-3 cursor-pointer select-none">
                 <input
                   type="checkbox"
                   checked={confirmed}
                   onChange={(e) => setConfirmed(e.target.checked)}
-                  className="w-4 h-4 mt-0.5 rounded accent-teal-700"
+                  className="w-4 h-4 mt-0.5 rounded accent-brand"
                 />
                 <span className="text-[13px] text-gray-700 font-body leading-relaxed">
                   I confirm all customer information is correct.

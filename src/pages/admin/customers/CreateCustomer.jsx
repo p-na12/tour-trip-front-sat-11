@@ -238,7 +238,7 @@ const CreateCustomer = () => {
                 px-4
                 py-2
                 rounded-lg
-                bg-teal-700
+                bg-brand
                 text-white
                 text-[13px]
                 font-semibold
@@ -315,7 +315,7 @@ const CreateCustomer = () => {
               disabled={!confirmed || saving === "create"}
               className={cx(
                 "inline-flex items-center gap-2 text-[13.5px] font-semibold px-5 py-2.5 rounded-lg transition-colors font-body shadow-sm",
-                confirmed ? "bg-teal-700 text-white hover:bg-teal-800" : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                confirmed ? "bg-brand text-white hover:bg-brand-hover" : "bg-gray-100 text-gray-400 cursor-not-allowed"
               )}
             >
               {saving === "create" ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}

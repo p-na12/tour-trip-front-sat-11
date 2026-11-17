@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
+@theme {
+  --color-brand: #008140;
+  --color-brand-hover: #006f37;
+}
+
 :root {
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 }

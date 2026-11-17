@@ -44,7 +44,7 @@ const CustomerListPage = ({
           </div>
           <button
             onClick={() => navigate("/admin/customers/create")}
-            className="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-teal-700 hover:bg-teal-800 text-white text-[13.5px] font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-colors cursor-pointer"
+            className="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-brand hover:bg-brand-hover text-white text-[13.5px] font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-colors cursor-pointer"
           >
             <Plus className="w-4 h-4" /> Create Customer
           </button>
@@ -52,7 +52,7 @@ const CustomerListPage = ({
 
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 px-4 sm:px-5 py-4 border-b border-gray-100">
-            <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 w-full sm:max-w-xs">
+            <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 w-full sm:max-w-xs focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/15">
               <Search className="w-4 h-4 text-gray-400" />
               <input
                 type="text"
@@ -84,6 +84,7 @@ const CustomerListPage = ({
                         customers.length > 0 &&
                         selectedIds.length === customers.length
                       }
+                      className="accent-brand"
                       onChange={(e) =>
                         setSelectedIds(
                           e.target.checked ? customers.map((c) => c.id) : [],
@@ -112,6 +113,7 @@ const CustomerListPage = ({
                         <input
                           type="checkbox"
                           checked={selectedIds.includes(c.id)}
+                          className="accent-brand"
                           onChange={(e) => {
                             if (e.target.checked) {
                               setSelectedIds((prev) => [...prev, c.id]);
@@ -127,7 +129,7 @@ const CustomerListPage = ({
                       {/* Customer */}
                       <td className="px-5 py-3.5">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full overflow-hidden bg-teal-50 text-teal-700 flex items-center justify-center text-[11.5px] font-semibold font-display shrink-0">
+                          <div className="w-8 h-8 rounded-full overflow-hidden bg-brand/10 text-brand flex items-center justify-center text-[11.5px] font-semibold font-display shrink-0">
                             {c.photo || c.image ? (
                               <img
                                 src={c.photo || c.image}
@@ -159,7 +161,7 @@ const CustomerListPage = ({
                           className={cx(
                             "text-[11.5px] font-medium px-2.5 py-1 rounded-full",
                             c.status === "Active"
-                              ? "bg-emerald-50 text-emerald-600"
+                              ? "bg-brand/10 text-brand"
                               : "bg-amber-50 text-amber-600",
                           )}
                         >

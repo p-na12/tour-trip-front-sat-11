@@ -63,7 +63,7 @@ export default function CreateCategoryPage() {
                     name="categoryCode"
                     value={formData.categoryCode}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand"
                     readOnly
                   />
                   <button type="button" className="px-3 py-2 border border-gray-200 rounded-lg text-xs font-medium hover:bg-gray-50">
@@ -82,7 +82,7 @@ export default function CreateCategoryPage() {
                   name="categoryName"
                   value={formData.categoryName}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand"
                 />
               </div>
 
@@ -102,7 +102,7 @@ export default function CreateCategoryPage() {
                   maxLength="500"
                   value={formData.description}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand"
                 ></textarea>
               </div>
 
@@ -119,7 +119,7 @@ export default function CreateCategoryPage() {
                       name="activationDate"
                       value={formData.activationDate}
                       onChange={handleChange}
-                      className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand"
                     />
                   </div>
                   <button
@@ -148,7 +148,7 @@ export default function CreateCategoryPage() {
                 <button
                   type="button"
                   onClick={handleSave}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-emerald-700 text-white rounded-lg text-sm font-medium hover:bg-emerald-800"
+                  className="flex items-center gap-1.5 px-4 py-2 bg-brand text-white rounded-lg text-sm font-medium hover:bg-brand-hover"
                 >
                   <Save className="w-4 h-4" />
                   Save Category
@@ -170,7 +170,7 @@ export default function CreateCategoryPage() {
                   <label
                     key={statusOption}
                     className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-colors ${formData.status === statusOption
-                      ? 'border-emerald-500 bg-emerald-50/30'
+                      ? 'border-brand bg-brand/5'
                       : 'border-gray-100 hover:bg-gray-50'
                       }`}
                   >
@@ -181,7 +181,7 @@ export default function CreateCategoryPage() {
                         value={statusOption}
                         checked={formData.status === statusOption}
                         onChange={handleChange}
-                        className="text-emerald-600 focus:ring-emerald-500"
+                        className="text-brand focus:ring-brand"
                       />
                       <span className="text-sm font-medium text-gray-700">{statusOption}</span>
                     </div>
@@ -193,16 +193,16 @@ export default function CreateCategoryPage() {
             {/* Best Practices Section */}
             <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm space-y-3">
               <h3 className="font-bold text-gray-900 text-sm flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <ShieldCheck className="w-4 h-4 text-brand" />
                 Curator Best Practices
               </h3>
               <ul className="space-y-2 text-xs text-gray-500">
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mt-0.5 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" />
                   Keep titles concise and clear.
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mt-0.5 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" />
                   Ensure correct taxonomy linkage.
                 </li>
               </ul>

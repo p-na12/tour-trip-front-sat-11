@@ -108,7 +108,7 @@ export default function PopularTours() {
                         {t("adminDashboard.activeTours")}
                     </span>
 
-                    <span className="mt-1 text-[10px] font-semibold text-emerald-600">
+                    <span className="mt-1 text-[10px] font-semibold text-green-600">
                         {t("adminDashboard.thisMonthTrend")}
                     </span>
                 </div>
@@ -137,8 +137,8 @@ export default function PopularTours() {
                                     text-xs font-bold
                                     text-slate-500
                                     transition
-                                    group-hover:bg-teal-50
-                                    group-hover:text-teal-700
+                                    group-hover:bg-green-50
+                                    group-hover:text-green-700
                                 "
                             >
                                 {idx + 1}
@@ -176,9 +176,9 @@ export default function PopularTours() {
                     py-2.5 text-xs font-semibold
                     text-slate-600
                     transition-all
-                    hover:border-teal-200
-                    hover:bg-teal-50
-                    hover:text-teal-700
+                    hover:border-green-200
+                    hover:bg-green-50
+                    hover:text-green-700
                 "
             >
                 {t("adminDashboard.viewAllTours")} →

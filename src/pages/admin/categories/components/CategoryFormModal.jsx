@@ -87,7 +87,7 @@ export default function CategoryFormModal({ isOpen, category, onClose, onSubmit 
                 'w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border text-slate-700 placeholder:text-slate-400 outline-none transition-all duration-200 focus:bg-white',
                 errors.name
                   ? 'border-rose-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-100'
-                  : 'border-slate-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100',
+                  : 'border-slate-200 focus:border-brand focus:ring-2 focus:ring-brand/15',
               ].join(' ')}
             />
             {errors.name && <p className="mt-1 text-xs text-rose-500">{errors.name}</p>}
@@ -107,7 +107,7 @@ export default function CategoryFormModal({ isOpen, category, onClose, onSubmit 
                 'w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border text-slate-700 placeholder:text-slate-400 outline-none transition-all duration-200 focus:bg-white resize-none',
                 errors.description
                   ? 'border-rose-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-100'
-                  : 'border-slate-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100',
+                  : 'border-slate-200 focus:border-brand focus:ring-2 focus:ring-brand/15',
               ].join(' ')}
             />
             {errors.description && <p className="mt-1 text-xs text-rose-500">{errors.description}</p>}
@@ -128,7 +128,7 @@ export default function CategoryFormModal({ isOpen, category, onClose, onSubmit 
                     title={option.label}
                     className={[
                       'flex items-center justify-center h-10 rounded-xl border transition-colors duration-150',
-                      isSelected ? 'border-indigo-400 ring-2 ring-indigo-100' : 'border-slate-200 hover:border-slate-300',
+                      isSelected ? 'border-brand ring-2 ring-brand/15' : 'border-slate-200 hover:border-slate-300',
                       visual.bg,
                     ].join(' ')}
                   >
@@ -153,7 +153,7 @@ export default function CategoryFormModal({ isOpen, category, onClose, onSubmit 
                   className={[
                     'flex-1 px-3.5 py-2.5 text-sm font-medium rounded-xl border transition-colors duration-150',
                     form.status === option.value
-                      ? 'bg-indigo-50 border-indigo-300 text-indigo-700'
+                      ? 'bg-brand/5 border-brand/20 text-brand'
                       : 'bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-700',
                   ].join(' ')}
                 >
@@ -182,9 +182,9 @@ export default function CategoryFormModal({ isOpen, category, onClose, onSubmit 
                   value={form.image}
                   onChange={(e) => setForm((prev) => ({ ...prev, image: e.target.value }))}
                   placeholder="Paste an image URL…"
-                  className="w-full px-3.5 py-2 text-sm rounded-xl bg-slate-50 border border-slate-200 text-slate-700 placeholder:text-slate-400 outline-none transition-all duration-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 focus:bg-white"
+                  className="w-full px-3.5 py-2 text-sm rounded-xl bg-slate-50 border border-slate-200 text-slate-700 placeholder:text-slate-400 outline-none transition-all duration-200 focus:border-brand focus:ring-2 focus:ring-brand/15 focus:bg-white"
                 />
-                <label className="inline-block text-xs font-medium text-indigo-600 hover:text-indigo-700 cursor-pointer">
+                <label className="inline-block text-xs font-medium text-brand hover:text-brand-hover cursor-pointer">
                   or upload a file
                   <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
                 </label>
@@ -203,7 +203,7 @@ export default function CategoryFormModal({ isOpen, category, onClose, onSubmit 
             <button
               type="submit"
               disabled={isSaving}
-              className="px-4 py-2.5 text-sm font-semibold text-white rounded-xl bg-gradient-to-r from-indigo-500 to-blue-600 shadow-sm hover:from-indigo-600 hover:to-blue-700 disabled:opacity-60 transition-all duration-150"
+              className="px-4 py-2.5 text-sm font-semibold text-white rounded-xl bg-brand shadow-sm hover:bg-brand-hover disabled:opacity-60 transition-colors duration-150"
             >
               {isSaving ? 'Saving…' : 'Save Category'}
             </button>

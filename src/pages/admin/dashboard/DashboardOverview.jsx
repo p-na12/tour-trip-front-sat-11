@@ -26,7 +26,7 @@ export default function DashboardOverview() {
                         <button className="inline-flex items-center px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 transition">
                             📅 {t("adminDashboard.thisMonth")} ▾
                         </button>
-                        <button className="inline-flex items-center px-4 py-2 bg-teal-800 rounded-xl text-sm font-semibold text-white shadow-sm hover:bg-teal-900 transition">
+                        <button className="inline-flex items-center px-4 py-2 bg-green-800 rounded-xl text-sm font-semibold text-white shadow-sm hover:bg-green-900 transition">
                             ⬇ {t("adminDashboard.exportReport")}
                         </button>
                     </div>

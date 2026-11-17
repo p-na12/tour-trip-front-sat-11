@@ -22,14 +22,14 @@ export default function CategoryStatsCards({ stats, isLoading }) {
       label: 'Total Categories',
       value: stats.total,
       icon: LayersIcon,
-      tone: { iconWrap: 'bg-indigo-50', icon: 'text-indigo-600' },
+      tone: { iconWrap: 'bg-brand/10', icon: 'text-brand' },
     },
     {
       key: 'active',
       label: 'Active Categories',
       value: stats.active,
       icon: CheckCircleIcon,
-      tone: { iconWrap: 'bg-emerald-50', icon: 'text-emerald-600' },
+      tone: { iconWrap: 'bg-brand/10', icon: 'text-brand' },
     },
     {
       key: 'inactive',
