@@ -7,6 +7,7 @@ const USERS_KEY = "tour-trip-users";
 const USER_KEY = "tour-trip-user";
 const SESSION_USER_KEY = "tour-trip-session-user";
 const BOOKINGS_KEY = "tour-trip-bookings";
+const CUSTOMERS_KEY = "tour-trip-admin-customers";
 
 function readStorage(key, fallback) {
   const value = window.localStorage.getItem(key);
@@ -25,6 +26,7 @@ export function AuthProvider({ children }) {
   const [users, setUsers] = useState(() => readStorage(USERS_KEY, []));
   const [user, setUser] = useState(readCurrentUser);
   const [bookings, setBookings] = useState(() => readStorage(BOOKINGS_KEY, []));
+  const [customers, setCustomers] = useState(() => readStorage(CUSTOMERS_KEY, []));
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
@@ -34,6 +36,10 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     window.localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
   }, [bookings]);
+
+  useEffect(() => {
+    window.localStorage.setItem(CUSTOMERS_KEY, JSON.stringify(customers));
+  }, [customers]);
 
   useEffect(() => {
     if (!toast) return undefined;
@@ -60,6 +66,27 @@ export function AuthProvider({ children }) {
     };
     setUsers((currentUsers) => [...currentUsers, newUser]);
     return { user: newUser };
+  };
+
+  const createCustomer = (formData) => {
+    const email = formData.email.trim().toLowerCase();
+    const emailExists =
+      users.some((existingUser) => existingUser.email === email) ||
+      customers.some((existingCustomer) => existingCustomer.email === email);
+    if (emailExists) {
+      return { error: "A customer with this email already exists." };
+    }
+
+    const newCustomer = {
+      id: `customer-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      name: formData.name.trim(),
+      email,
+      phone: formData.phone.trim(),
+      status: "Active",
+      createdAt: new Date().toISOString(),
+    };
+    setCustomers((currentCustomers) => [newCustomer, ...currentCustomers]);
+    return { customer: newCustomer };
   };
 
   const signIn = ({ email, password, remember = true }) => {
@@ -139,9 +166,12 @@ export function AuthProvider({ children }) {
 
   const value = {
     user,
+    users,
+    customers,
     isAuthenticated: Boolean(user),
     notify,
     register,
+    createCustomer,
     signIn,
     resetPassword,
     signOut,

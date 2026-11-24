@@ -1,13 +1,14 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Check, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
-import CustomerListPage from "./CustomerListPage";
-import { emptyForm, INITIAL_CUSTOMERS, STEPS } from '../../../constants/customerConstant';
+import { emptyForm, STEPS } from '../../../constants/customerConstant';
 import Stepper from '../../../components/admin/Stepper';
 import StepPersonal from '../../../components/admin/StepPersonal';
 import StepTrip from '../../../components/admin/StepTrip';
 import StepReview from '../../../components/admin/StepReview';
 import Toast from '../../../components/admin/Toast';
 import { cx } from '../../../utils/helpers';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/auth";
 
 
 const FONTS = (
@@ -33,11 +34,8 @@ const FONTS = (
 
 
 const CreateCustomer = () => {
-
-  const [view, setView] = useState(
-    location.pathname === "/admin/customers/create"
-      ? "create"
-      : "list");
+  const navigate = useNavigate();
+  const { createCustomer } = useAuth();
   const [step, setStep] = useState(1);
   const [furthestStep, setFurthestStep] = useState(1);
   const [data, setData] = useState(emptyForm);
@@ -45,31 +43,6 @@ const CreateCustomer = () => {
   const [confirmed, setConfirmed] = useState(false);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState(null);
-
-  const [customers, setCustomers] = useState(INITIAL_CUSTOMERS);
-
-  // Add this state
-  const [selectedIds, setSelectedIds] = useState([]);
-
-  const [highlightId, setHighlightId] = useState(null);
-
-  const handleDeleteSelected = () => {
-
-    if (selectedIds.length === 0) return;
-
-    const confirmed = window.confirm(
-      "Are you sure you want to delete the selected customer(s)?"
-    );
-
-    if (!confirmed) return;
-
-    setCustomers((list) =>
-      list.filter((c) => !selectedIds.includes(c.id))
-    );
-
-    setSelectedIds([]);
-  };
-
 
   useEffect(() => {
     if (!toast) return;
@@ -89,13 +62,13 @@ const CreateCustomer = () => {
     });
   }, []);
 
-  const resetAndGoToList = () => {
+  const cancelCreate = () => {
     setData(emptyForm);
     setErrors({});
     setConfirmed(false);
     setStep(1);
     setFurthestStep(1);
-    setView("list");
+    navigate("/admin/customers");
   };
 
   const validateStep1 = () => {
@@ -133,46 +106,22 @@ const CreateCustomer = () => {
     if (step !== 3) { setStep(3); setFurthestStep((f) => Math.max(f, 3)); return; }
 
     setSaving("create");
-    setTimeout(() => {
-      const initials = data.fullName.trim().split(/\s+/).slice(0, 2).map((w) => w[0]?.toUpperCase()).join("") || "CU";
-      const newCustomer = {
-        id: `c${Date.now()}`,
-        name: data.fullName,
-        email: data.email,
-        destination: data.destination,
-        status: "Active",
-        created: "Aug 25, 2026",
-        initials,
-        photo: data.photo?.url || null,
-      };
-      setCustomers((list) => [newCustomer, ...list]);
-      setHighlightId(newCustomer.id);
-      setSaving(false);
-      setToast("Customer created successfully.");
-      setTimeout(() => {
-        resetAndGoToList();
-        setTimeout(() => setHighlightId(null), 2200);
-      }, 900);
-    }, 1200);
+    const result = createCustomer({
+      name: data.fullName,
+      email: data.email,
+      phone: `${data.countryCode} ${data.phone}`,
+    });
+    setSaving(false);
+    if (result.error) {
+      setErrors((currentErrors) => ({ ...currentErrors, email: result.error }));
+      setStep(1);
+      setFurthestStep((currentStep) => Math.max(currentStep, 1));
+      return;
+    }
+
+    setToast("Customer created successfully.");
+    setTimeout(() => navigate("/admin/customers"), 900);
   };
-
-  if (view === "list") {
-    return (
-      <div className="anim-step-in">
-        {FONTS}
-        <Toast toast={toast} />
-        <CustomerListPage
-          customers={customers}
-          onCreate={() => setView("create")}
-          highlightId={highlightId}
-          selectedIds={selectedIds}
-          setSelectedIds={setSelectedIds}
-          onDeleteSelected={handleDeleteSelected}
-        />
-
-      </div>
-    );
-  }
 
   const isLastStep = step === 3;
 
@@ -203,7 +152,7 @@ const CreateCustomer = () => {
             w-full
             sm:w-auto">
             <button
-              onClick={resetAndGoToList}
+              onClick={cancelCreate}
               className="text-[13px] font-medium px-3.5 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors font-body"
             >
               Cancel
@@ -228,27 +177,6 @@ const CreateCustomer = () => {
             >
               {saving === "draft" && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
               Save Draft
-            </button>
-            <button
-              onClick={() => navigate("/admin/customers/create")}
-              disabled={saving === "create"}
-              className="min-h-[44px]
-                w-full
-                sm:w-auto
-                px-4
-                py-2
-                rounded-lg
-                bg-brand
-                text-white
-                text-[13px]
-                font-semibold
-                flex
-                items-center
-                justify-center
-                gap-1.5"
-            >
-              {saving === "create" && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-              Create Customer
             </button>
           </div>
         </div>

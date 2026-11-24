@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import CustomerData from "../data/CustomerData";
+import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
 
 import {
   FaSearch,
@@ -7,19 +8,57 @@ import {
   FaFilter,
   FaPlus,
   FaEye,
-  FaChevronLeft,
-  FaChevronRight,
 } from "react-icons/fa";
 
 function CustomerList() {
   const [search, setSearch] = useState("");
+  const { users, customers: adminCustomers, bookings } = useAuth();
+
+  const customers = useMemo(() => {
+    const registeredCustomers = users.map((user) => {
+      const customerBookings = bookings.filter((booking) => booking.userId === user.id);
+      const lastBooking = customerBookings[0];
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        bookings: customerBookings.length,
+        lastActivity: lastBooking?.tourName || "No bookings yet",
+        date: lastBooking
+          ? new Date(lastBooking.bookingDate).toLocaleDateString()
+          : "",
+        status: "Active",
+        image: "",
+      };
+    });
+    const registeredEmails = new Set(users.map((user) => user.email.toLowerCase()));
+    const adminCreatedCustomers = adminCustomers
+      .filter((customer) => !registeredEmails.has(customer.email.toLowerCase()))
+      .map((customer) => {
+        const customerBookings = bookings.filter(
+          (booking) => booking.email?.toLowerCase() === customer.email.toLowerCase(),
+        );
+        const lastBooking = customerBookings[0];
+        return {
+          ...customer,
+          bookings: customerBookings.length,
+          lastActivity: lastBooking?.tourName || "No bookings yet",
+          date: lastBooking
+            ? new Date(lastBooking.bookingDate).toLocaleDateString()
+            : "",
+          image: "",
+        };
+      });
+
+    return [...registeredCustomers, ...adminCreatedCustomers];
+  }, [users, adminCustomers, bookings]);
 
   // Search customers
-  const filteredCustomers = CustomerData.filter((customer) => {
+  const filteredCustomers = customers.filter((customer) => {
     return (
       customer.name.toLowerCase().includes(search.toLowerCase()) ||
-      customer.email.toLowerCase().includes(search.toLowerCase()) ||
-      customer.id.toLowerCase().includes(search.toLowerCase())
+      customer.email.toLowerCase().includes(search.toLowerCase())
     );
   });
 
@@ -47,11 +86,6 @@ function CustomerList() {
           <div className="gap-6 flex items-center">
             <FaBell className="text-lg text-gray-600" />
 
-            <img
-              src="https://i.pinimg.com/1200x/b3/44/0a/b3440a0919afed7d5e9b8c7a1f1b37f0.jpg"
-              alt="profile"
-              className="h-9 w-9 rounded-full object-cover"
-            />
           </div>
         </div>
       </div>
@@ -85,13 +119,13 @@ function CustomerList() {
             </button>
 
             {/* New Customer */}
-            <button
-              type="button"
+            <Link
+              to="/admin/customers/create"
               className="gap-2 px-5 h-10 rounded-xl bg-teal-700 text-sm font-medium text-white flex items-center hover:bg-teal-800"
             >
               <FaPlus />
               New Customer
-            </button>
+            </Link>
 
           </div>
         </div>
@@ -156,17 +190,18 @@ function CustomerList() {
                           />
                         ) : (
                           <div className="h-10 w-10 justify-center rounded-full bg-[#e5eaf5] text-sm font-medium text-gray-500 flex items-center">
-                            MR
+                            {customer.name
+                              .split(/\s+/)
+                              .slice(0, 2)
+                              .map((part) => part[0])
+                              .join("")
+                              .toUpperCase()}
                           </div>
                         )}
 
                         <div>
                           <p className="text-sm font-semibold text-gray-800">
                             {customer.name}
-                          </p>
-
-                          <p className="text-[11px] text-gray-500">
-                            ID: {customer.id}
                           </p>
                         </div>
 
@@ -188,7 +223,13 @@ function CustomerList() {
 
                     {/* BOOKINGS */}
                     <td className="px-5 py-3 text-center text-sm font-medium">
-                      {customer.bookings}
+                      <Link
+                        to={`/admin/bookings?customer=${encodeURIComponent(customer.email || customer.name)}`}
+                        className="font-semibold text-teal-700 hover:text-teal-900 hover:underline"
+                        aria-label={`View ${customer.bookings} bookings for ${customer.name}`}
+                      >
+                        {customer.bookings}
+                      </Link>
                     </td>
 
                     {/* LAST ACTIVITY */}
@@ -262,52 +303,8 @@ function CustomerList() {
           <div className="px-5 py-3 justify-between border-t border-gray-200 flex items-center">
 
             <p className="text-xs text-gray-500">
-              Showing 1 to {filteredCustomers.length} of 156 entries
+              Showing {filteredCustomers.length} customers
             </p>
-
-            <div className="gap-2 flex items-center">
-
-              {/* Previous */}
-              <button
-                type="button"
-                className="h-7 w-7 justify-center rounded border border-gray-300 text-xs text-gray-400 flex items-center hover:bg-gray-50"
-              >
-                <FaChevronLeft />
-              </button>
-
-              {/* Page 1 */}
-              <button
-                type="button"
-                className="h-7 w-7 justify-center rounded bg-teal-700 text-xs text-white flex items-center"
-              >
-                1
-              </button>
-
-              {/* Page 2 */}
-              <button
-                type="button"
-                className="h-7 w-7 justify-center rounded border border-gray-300 text-xs text-gray-600 flex items-center hover:bg-gray-50"
-              >
-                2
-              </button>
-
-              {/* Page 3 */}
-              <button
-                type="button"
-                className="h-7 w-7 justify-center rounded border border-gray-300 text-xs text-gray-600 flex items-center hover:bg-gray-50"
-              >
-                3
-              </button>
-
-              {/* Next */}
-              <button
-                type="button"
-                className="h-7 w-7 justify-center rounded border border-gray-300 text-xs text-gray-500 flex items-center hover:bg-gray-50"
-              >
-                <FaChevronRight />
-              </button>
-
-            </div>
           </div>
 
         </div>

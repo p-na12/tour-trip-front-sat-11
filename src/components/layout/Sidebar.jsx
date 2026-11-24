@@ -1,7 +1,6 @@
 import { useState, useEffect, useSyncExternalStore } from "react";
 import { PanelLeftClose, PanelLeftOpen, X } from "lucide-react";
 import { LayoutGroup } from "framer-motion";
-import { useTranslation } from "react-i18next";
 import { sidebarLinks, sidebarFooterLinks } from "../../constants/sidebarLinks";
 import { useActiveRoute } from "../../hooks/useActiveRoute";
 import { SidebarItem } from "./SidebarItem";
@@ -69,17 +68,6 @@ export function Sidebar({ className }) {
   const [mobileOpenState, setMobileOpen] = useMobileSidebar();
   const isMobile = useIsMobile();
   const isActive = useActiveRoute();
-  const { t } = useTranslation();
-
-  const translatedSidebarLinks = sidebarLinks.map((item) => ({
-    ...item,
-    label: t(`admin.${item.labelKey || 'dashboard'}`),
-  }));
-
-  const translatedSidebarFooterLinks = sidebarFooterLinks.map((item) => ({
-    ...item,
-    label: t(`admin.${item.labelKey || 'logout'}`),
-  }));
 
   // Lock body scroll while the mobile drawer is open.
   useEffect(() => {
@@ -154,7 +142,7 @@ export function Sidebar({ className }) {
         {/* Primary navigation */}
         <LayoutGroup id="sidebar">
           <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 py-2">
-            {translatedSidebarLinks.map((item) => (
+            {sidebarLinks.map((item) => (
               <SidebarItem
                 key={item.path}
                 {...item}
@@ -168,7 +156,7 @@ export function Sidebar({ className }) {
 
           {/* Footer actions */}
           <div className="flex flex-col gap-1 border-t border-slate-200 px-3 py-3">
-            {translatedSidebarFooterLinks.map((item) => (
+            {sidebarFooterLinks.map((item) => (
               <SidebarItem
                 key={item.path}
                 {...item}

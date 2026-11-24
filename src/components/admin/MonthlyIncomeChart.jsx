@@ -1,7 +1,6 @@
 
 import { Line } from "react-chartjs-2";
 import { MONTHLY_INCOME } from "../../constants/dashboardOverviewData";
-import { useTranslation } from "react-i18next";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -24,17 +23,14 @@ ChartJS.register(
 );
 
 export default function MonthlyIncomeChart() {
-    const { t } = useTranslation();
-    const monthKeys = ["may", "jun", "jul", "aug", "sep", "oct"];
+    const monthLabels = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"];
     // Chart Data
     const data = {
-        labels: MONTHLY_INCOME.map(
-            (_, index) => t(`adminDashboard.months.${monthKeys[index]}`)
-        ),
+        labels: monthLabels,
 
         datasets: [
             {
-                label: t("adminDashboard.monthlyIncomeSeries"),
+                label: "Monthly Income",
 
                 data: MONTHLY_INCOME.map(
                     (item) => item.value
@@ -170,11 +166,11 @@ export default function MonthlyIncomeChart() {
 
                 <div>
                     <h3 className="text-lg font-bold text-slate-900">
-                        {t("adminDashboard.monthlyIncome")}
+                        Monthly Income
                     </h3>
 
                     <p className="mt-1 text-xs text-slate-400">
-                        {t("adminDashboard.incomeDescription")}
+                        Monthly income overview
                     </p>
                 </div>
                 <button

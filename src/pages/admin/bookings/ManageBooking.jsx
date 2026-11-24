@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Download, Search, CalendarDays } from "lucide-react";
 import { ManageBookingData } from "../../../data/ManageBookingData";
+import { useAuth } from "../../../context/auth";
+import { useSearchParams } from "react-router-dom";
 
 function ManageBooking() {
   const tabs = ["All", "Pending", "Confirmed", "Completed", "Cancelled"];
+  const { bookings: customerBookings } = useAuth();
+  const [searchParams] = useSearchParams();
 
   const getStatusStyle = (status) => {
     switch (status) {
@@ -20,8 +24,20 @@ function ManageBooking() {
     }
   };
 
-  const [bookings] = useState(ManageBookingData);
-  const [search, setSearch] = useState("");
+  const bookings = [
+    ...customerBookings.map((booking) => ({
+      id: booking.reference || booking.id,
+      customerName: booking.customerName,
+      customerEmail: booking.email,
+      tourPackage: booking.tourName,
+      bookingDate: new Date(booking.bookingDate).toLocaleDateString(),
+      travelDate: booking.travelDate,
+      amount: Number(booking.totalPrice),
+      status: booking.status,
+    })),
+    ...ManageBookingData,
+  ];
+  const [search, setSearch] = useState(() => searchParams.get("customer") || "");
   const [activeTab, setActiveTab] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -30,6 +46,7 @@ function ManageBooking() {
   const filteredBookings = bookings.filter((b) => {
     const matchesSearch =
       b.customerName.toLowerCase().includes(search.toLowerCase()) ||
+      b.customerEmail?.toLowerCase().includes(search.toLowerCase()) ||
       b.tourPackage.toLowerCase().includes(search.toLowerCase()) ||
       b.id.toString().includes(search);
     const matchesTab = activeTab === "All" || b.status === activeTab;
