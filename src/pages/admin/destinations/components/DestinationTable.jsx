@@ -63,7 +63,7 @@ function Thumbnail({ src, alt }) {
       alt={alt}
       loading="lazy"
       onError={() => setFailed(true)}
-      className="size-11 shrink-0 rounded-lg object-cover ring-1 ring-slate-200/70 ring-inset transition duration-200 group-hover:ring-2 group-hover:ring-indigo-300"
+      className="size-11 shrink-0 rounded-lg object-cover ring-1 ring-slate-200/70 ring-inset transition duration-200 group-hover:ring-2 group-hover:ring-green-300"
     />
   );
 }
@@ -77,7 +77,7 @@ function ActionButton({ label, tone, onClick, children }) {
       title={label}
       className={[
         'grid size-8 place-items-center rounded-lg transition-colors duration-150',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40',
+        'focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500/40',
         tone,
       ].join(' ')}
     >
@@ -91,7 +91,7 @@ function EmptyState() {
     <tr>
       <td colSpan={COLUMNS.length} className="px-6 py-20">
         <div className="flex flex-col items-center justify-center gap-3 text-center">
-          <div className="grid size-14 place-items-center rounded-2xl bg-indigo-50 text-indigo-600">
+          <div className="grid size-14 place-items-center rounded-2xl bg-green-50 text-green-600">
             <MapPinned size={24} />
           </div>
           <div>
@@ -181,7 +181,7 @@ export default function DestinationTable({ destinations, onEdit, onDelete }) {
                   <div className="flex items-center justify-end gap-1.5">
                     <ActionButton
                       label={`Edit ${destination.name}`}
-                      tone="text-slate-400 hover:bg-indigo-50 hover:text-indigo-600"
+                      tone="text-slate-400 hover:bg-green-50 hover:text-green-600"
                       onClick={() => onEdit(destination)}
                     >
                       <Pencil size={16} />

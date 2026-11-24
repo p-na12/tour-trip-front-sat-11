@@ -25,7 +25,7 @@ const StepTrip = ({ data, setField, toggleArrayField }) => {
                 <TextField label="Return Date" type="date" value={data.returnDate} onChange={(e) => setField("returnDate", e.target.value)} />
                 <label className="sm:col-span-2 flex items-center gap-2.5 cursor-pointer select-none">
                   <input type="checkbox" checked={data.flexibleDates} onChange={(e) => setField("flexibleDates", e.target.checked)}
-                    className="w-4 h-4 rounded accent-teal-700" />
+                    className="w-4 h-4 rounded accent-brand" />
                   <span className="text-[13.5px] text-gray-700 font-body">Dates are flexible</span>
                 </label>
               </div>
@@ -57,7 +57,7 @@ const StepTrip = ({ data, setField, toggleArrayField }) => {
                         value={t}
                         checked={data.transportation === t}
                         onChange={(e) => setField("transportation", e.target.value)}
-                        className="w-4 h-4 accent-teal-700"
+                        className="w-4 h-4 accent-brand"
                       />
                       <span className="text-[13.5px] text-gray-700 font-body">
                         {t}
@@ -79,7 +79,7 @@ const StepTrip = ({ data, setField, toggleArrayField }) => {
                       onClick={() => toggleArrayField("interests", tag)}
                       className={cx(
                         "px-3.5 py-1.5 rounded-full text-[12.5px] font-medium font-body border transition-all duration-150 flex items-center gap-1.5",
-                        active ? "bg-emerald-50 border-emerald-300 text-emerald-700" : "bg-white border-gray-200 text-gray-600 hover:border-gray-300"
+                        active ? "bg-brand/5 border-brand/20 text-brand" : "bg-white border-gray-200 text-gray-600 hover:border-gray-300"
                       )}
                     >
                       {active && <Check className="w-3 h-3" />}
@@ -96,7 +96,7 @@ const StepTrip = ({ data, setField, toggleArrayField }) => {
                 value={data.specialRequests}
                 onChange={(e) => setField("specialRequests", e.target.value)}
                 placeholder="Anything the tour team should know before booking..."
-                className="w-full px-3.5 py-3 rounded-lg border border-gray-200 text-[14px] font-body text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-100 focus:border-teal-700 resize-none transition-colors"
+                className="w-full px-3.5 py-3 rounded-lg border border-gray-200 text-[14px] font-body text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand/15 focus:border-brand resize-none transition-colors"
               />
             </Card>
           </div>

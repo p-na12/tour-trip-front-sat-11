@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
  * @type {{ label: string, path: string }[]}
  */
 const mastersTabs = [
-  { label: "Tours", path: "/admin/masters/tours" },
+  { label: "Tours", path: "/admin/tours" },
   { label: "Categories", path: "/admin/masters/categories" },
   { label: "Destinations", path: "/admin/masters/destinations" },
   { label: "Guides", path: "/admin/masters/guides" },

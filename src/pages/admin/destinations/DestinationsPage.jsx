@@ -53,7 +53,7 @@ export default function DestinationsPage() {
         <button
           type="button"
           onClick={handleAdd}
-          className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-indigo-600 px-4 py-2.5 text-[13.5px] font-semibold text-white shadow-sm shadow-indigo-600/25 transition-all duration-150 hover:bg-indigo-700 hover:shadow-indigo-600/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:ring-offset-2 active:scale-[0.98]"
+          className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-green-600 px-4 py-2.5 text-[13.5px] font-semibold text-white shadow-sm shadow-green-600/25 transition-all duration-150 hover:bg-green-700 hover:shadow-green-600/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50 focus-visible:ring-offset-2 active:scale-[0.98]"
         >
           <Plus size={15} strokeWidth={2.5} />
           Add New Destination

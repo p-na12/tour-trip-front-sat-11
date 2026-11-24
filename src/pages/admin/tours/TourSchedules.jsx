@@ -75,7 +75,7 @@ const TourSchedules = () => {
         <button
           type="button"
           onClick={() => navigate("/admin/tour-schedules/create")}
-          className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700">
+          className="flex items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-brand-hover">
           <FiPlus size={20} />
           Add Tour Schedule
         </button>
@@ -91,7 +91,7 @@ const TourSchedules = () => {
         <div className="rounded-2xl bg-white p-5 shadow-sm">
           <p className="text-sm text-slate-500">Average Price</p>
 
-          <h2 className="mt-2 text-2xl font-bold text-blue-600">$48.75</h2>
+          <h2 className="mt-2 text-2xl font-bold text-brand">$48.75</h2>
         </div>
         <div className="rounded-2xl bg-white p-5 shadow-sm">
           <p className="text-sm text-slate-500">Average Rating</p>
@@ -104,7 +104,7 @@ const TourSchedules = () => {
         <div className="rounded-2xl bg-white p-5 shadow-sm">
           <p className="text-sm text-slate-500">Active Tours</p>
 
-          <h2 className="mt-2 text-2xl font-bold text-green-600">
+          <h2 className="mt-2 text-2xl font-bold text-brand">
             {tours.length}
           </h2>
         </div>
@@ -129,7 +129,7 @@ const TourSchedules = () => {
               placeholder="Search tour schedule..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/15"
             />
           </div>
         </div>
@@ -187,12 +187,12 @@ const TourSchedules = () => {
                     </td>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2 text-sm text-slate-600">
-                        <FiMapPin size={17} className="text-blue-500" />
+                        <FiMapPin size={17} className="text-brand" />
                         Destination #{tour.destination_id}
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <div className="flex items-center gap-1 font-bold text-blue-600">
+                      <div className="flex items-center gap-1 font-bold text-brand">
                         <FiDollarSign size={16} />
                         {tour.price}
                       </div>
@@ -223,7 +223,7 @@ const TourSchedules = () => {
                       <div className="flex justify-center gap-2">
                         <button
                           title="View"
-                          className="rounded-lg bg-blue-50 p-2 text-blue-600 transition hover:bg-blue-100"
+                          className="rounded-lg bg-brand/5 p-2 text-brand transition hover:bg-brand/10"
                         >
                           <FiEye size={17} />
                         </button>
@@ -276,7 +276,7 @@ const TourSchedules = () => {
               Previous
             </button>
 
-            <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white">
+            <button className="rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white">
               1
             </button>
 

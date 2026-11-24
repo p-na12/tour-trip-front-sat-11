@@ -23,11 +23,10 @@ ChartJS.register(
 );
 
 export default function MonthlyIncomeChart() {
+    const monthLabels = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"];
     // Chart Data
     const data = {
-        labels: MONTHLY_INCOME.map(
-            (item) => item.month
-        ),
+        labels: monthLabels,
 
         datasets: [
             {
@@ -171,7 +170,7 @@ export default function MonthlyIncomeChart() {
                     </h3>
 
                     <p className="mt-1 text-xs text-slate-400">
-                        Income performance from May to October
+                        Monthly income overview
                     </p>
                 </div>
                 <button
@@ -208,10 +207,10 @@ export default function MonthlyIncomeChart() {
                 <div
                     className="
                         rounded-full
-                        bg-emerald-50
+                        bg-green-50
                         px-3 py-1
                         text-xs font-semibold
-                        text-emerald-600
+                        text-green-600
                     "
                 >
                     ↑ 15.2%

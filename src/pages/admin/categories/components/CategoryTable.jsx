@@ -40,7 +40,7 @@ function EmptyState({ hasActiveFilters, onClearFilters }) {
             <button
               type="button"
               onClick={onClearFilters}
-              className="mt-1 text-sm font-medium text-indigo-600 hover:text-indigo-700"
+              className="mt-1 text-sm font-medium text-brand hover:text-brand-hover"
             >
               Clear filters
             </button>
@@ -106,7 +106,7 @@ export default function CategoryTable({ categories, isLoading, hasActiveFilters,
                     <div className="gap-2 justify-end flex items-center">
                       <ActionButton
                         label={`Edit ${category.name}`}
-                        tone="hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200"
+                        tone="hover:bg-brand/5 hover:text-brand hover:border-brand/20"
                         onClick={() => onEdit(category)}
                       >
                         <EditIcon width={15} height={15} />

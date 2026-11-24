@@ -1,10 +1,10 @@
-
 import { AppRoutes } from "./services/AppRoutes";
+import { AuthProvider } from "./context/AuthContext";
 
 export default function App() {
   return (
-    <div className="App">
+    <AuthProvider>
       <AppRoutes />
-    </div>
+    </AuthProvider>
   );
 }

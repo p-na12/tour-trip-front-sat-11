@@ -67,7 +67,7 @@ export default function CreateDestination() {
         <button
           type="button"
           onClick={() => navigate("/admin/destinations")}
-          className="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-blue-600"
+          className="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-green-600"
         >
           <ArrowLeft size={16} strokeWidth={1.8} />
           Destinations
@@ -106,7 +106,7 @@ export default function CreateDestination() {
                 value={form.name}
                 onChange={updateField}
                 placeholder="e.g. Angkor Wat"
-                className="mt-1.5 h-10 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-800 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="mt-1.5 h-10 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-800 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
               />
             </label>
 
@@ -120,7 +120,7 @@ export default function CreateDestination() {
                   value={form.province}
                   onChange={updateField}
                   placeholder="e.g. Siem Reap"
-                  className="mt-1.5 h-10 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-800 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  className="mt-1.5 h-10 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-800 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
                 />
               </label>
 
@@ -139,7 +139,7 @@ export default function CreateDestination() {
                     value={form.startingPrice}
                     onChange={updateField}
                     placeholder="0"
-                    className="h-10 w-full rounded-lg border border-slate-300 pl-8 pr-3 text-sm text-slate-800 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    className="h-10 w-full rounded-lg border border-slate-300 pl-8 pr-3 text-sm text-slate-800 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
                   />
                 </div>
               </label>
@@ -155,7 +155,7 @@ export default function CreateDestination() {
                 onChange={updateField}
                 rows="4"
                 placeholder="Describe this destination..."
-                className="mt-1.5 block min-h-24 w-full resize-y rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-800 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="mt-1.5 block min-h-24 w-full resize-y rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-800 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-100"
               />
             </label>
 
@@ -173,7 +173,7 @@ export default function CreateDestination() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="mt-1.5 flex min-h-32 w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-slate-50/50 px-4 py-5 text-center transition hover:border-blue-400 hover:bg-blue-50/30"
+                className="mt-1.5 flex min-h-32 w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-slate-50/50 px-4 py-5 text-center transition hover:border-green-400 hover:bg-green-50/30"
               >
                 {image ? (
                   <img
@@ -183,10 +183,10 @@ export default function CreateDestination() {
                   />
                 ) : (
                   <>
-                    <span className="mb-3 grid size-8 place-items-center rounded-full bg-blue-50 text-blue-600">
+                    <span className="mb-3 grid size-8 place-items-center rounded-full bg-green-50 text-green-600">
                       <Plus size={18} strokeWidth={2} />
                     </span>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600">
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-green-600">
                       <Upload size={15} /> Upload Destination Image
                     </span>
                     <span className="mt-1 text-xs text-slate-400">
@@ -220,7 +220,7 @@ export default function CreateDestination() {
             </button>
             <button
               type="submit"
-              className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-1"
+              className="rounded-lg bg-green-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-200 focus:ring-offset-1"
             >
               Create Destination
             </button>

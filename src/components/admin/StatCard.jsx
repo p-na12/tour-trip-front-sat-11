@@ -5,7 +5,7 @@ export default function StatCard({ title, value, change, icon }) {
                 <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-lg">
                     {icon}
                 </div>
-                <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600">
+                <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-green-50 text-green-600">
                     ↗ {change}
                 </span>
             </div>

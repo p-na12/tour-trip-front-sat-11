@@ -1,106 +1,119 @@
-import { Navigate, Routes, Route, Outlet } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import MastersTabs from "../components/common/MastersTabs";
+import CreateTour from "../components/tour/CreateTour";
 import DashboardOverview from "../pages/admin/dashboard/DashboardOverview";
-import { Sidebar } from "../components/layout/Sidebar";
-import ManageMasters from "../pages/admin/masters/ManageMaster";
 import ManageBooking from "../pages/admin/bookings/ManageBooking";
-import ManageCategory from "../pages/ManageCategory";
 import CategoriesPage from "../pages/admin/categories/CategoriesPage";
 import CreateCategoryPage from "../pages/admin/categories/CreateCategoryPage";
-import CustomerList from "../pages/CustomerList";
 import CreateCustomer from "../pages/admin/customers/CreateCustomer";
-import ReviewsPage from "../pages/admin/reviews/ReviewsPage";
+import CustomerList from "../pages/CustomerList";
 import CreateDestination from "../pages/admin/destinations/CreateDestination";
-import LoginForm from "../components/auth/LoginForm";
-import DestinationsPage from "../pages/admin/destinations";
-import RegisterForm from "../pages/public/auth/RegisterForm";
-import TourDetail from "../components/tour/TourDetailHero";
-import BookingPage from "../components/booking/BookingPage"
-
-import TourSchedules from "../pages/admin/tours/TourSchedules";
+import DestinationsPage from "../pages/admin/destinations/DestinationsPage";
 import GuidesPage from "../pages/admin/guides/GuidesPage";
+import ReviewsPage from "../pages/admin/reviews/ReviewsPage";
+import TourSchedules from "../pages/admin/tours/TourSchedules";
+import AboutPage from "../pages/public/about/AboutPage";
+import MyBookingsPage from "../pages/public/bookings/MyBookingsPage";
+import BookingFormPage from "../pages/public/bookings/BookingFormPage";
+import BookingDetailsPage from "../pages/public/bookings/BookingDetailsPage";
+import ProfilePage from "../pages/public/ProfilePage";
+import ContactPage from "../pages/public/contact/ContactPage";
+import DestinationsPagePublic from "../pages/public/destinations/DestinationsPage";
+import DestinationPage from "../components/public/DestinationPage";
 import PublicHome from "../pages/public/PublicHome";
-import Home from "../pages/Home";
+import LoginPage from "../pages/public/auth/LoginPage";
+import ForgotPasswordPage from "../pages/public/auth/ForgotPasswordPage";
+import RegisterPage from "../pages/public/auth/RegisterPage";
+import ProtectedRoute from "../components/auth/ProtectedRoute";
+import OtpVerifyPage from "../pages/public/auth/OtpVerifyPage";
+import TourDetail from "../components/tour/TourDetailHero";
 import TripDetailPage from "../pages/public/trips/TripDetailPage";
-import CreateTour from "../components/tour/CreateTour";
-import EditTour from "../components/tour/EditTour";
-import DeleteTour from "../components/tour/DeleteTour";
-const AdminLayout = () => {
-  return (
-    <div className="min-h-screen flex">
-      <Sidebar />
+import ToursPage from "../pages/public/tours/ToursPage";
+import TourDetailPage from "../pages/public/tours/TourDetailPage";
+import { AdminLayout } from "../layouts/AdminLayout";
+import PublicLayout from "../layouts/PublicLayout";
+import SystemSettings from "../pages/admin/settings/SystemSettings";
 
-      <main className="flex-1">
-        <Outlet />
-      </main>
-    </div>
-  );
-};
-export const AppRoutes = () => {
+const ReportsPage = lazy(() => import("../pages/admin/reports/ReportsPage"));
+
+export function AppRoutes() {
   return (
     <Routes>
-       <Route path="/login" element={<LoginForm />} />
-       <Route path="/register" element={<RegisterForm />} />
-       <Route path="/tour/detail" element={<TourDetail />} />
-       <Route path="/trips/:id" element={<TripDetailPage />} />
-       <Route path="/booking" element={<BookingPage />} />
-      <Route path="/" element={<Navigate to="/admin" replace />} />
-      <Route path="/" element={<Home />} />
+      <Route element={<PublicLayout />}>
+        <Route index element={<PublicHome />} />
+        <Route path="destinations" element={<DestinationPage />} />
+        <Route path="destinations/all" element={<DestinationsPagePublic />} />
+        <Route path="destinations/:id" element={<DestinationPage />} />
+        <Route path="tours" element={<ToursPage />} />
+        <Route path="tours/:slug" element={<TourDetailPage />} />
+        <Route path="trips/:id" element={<TripDetailPage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="contact" element={<ContactPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="verify-otp" element={<OtpVerifyPage />} />
+        <Route path="tour/detail" element={<TourDetail />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="my-bookings" element={<MyBookingsPage />} />
+          <Route path="booking/:slug" element={<BookingFormPage />} />
+          <Route path="booking-details/:bookingId" element={<BookingDetailsPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+        </Route>
+      </Route>
 
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<DashboardOverview />} />
-        <Route path="/admin" element={<DashboardOverview />} />
-        <Route path="/admin/masters" element={<ManageMasters />} />
-        <Route path="/admin/masters/tours/create" element={<CreateTour />} />
-        <Route path="/admin/manageBooking" element={<ManageBooking />} />
-        <Route path="/admin/categories" element={<CategoriesPage />} />
-        <Route
-          path="/admin/categories/create"
-          element={<CreateCategoryPage />}
-        />
-        <Route path="/admin/customerList" element={<CustomerList />} />
-        <Route
-          path="/admin/customers/create"
-          element={<CreateCustomer />}
-        />
-        <Route path="/admin/categories" element={<CategoriesPage />} />
+        <Route path="bookings" element={<ManageBooking />} />
+        <Route path="categories" element={<CategoriesPage />} />
+        <Route path="categories/create" element={<CreateCategoryPage />} />
+        <Route path="customers" element={<CustomerList />} />
+        <Route path="customers/create" element={<CreateCustomer />} />
+        <Route path="destinations" element={<DestinationsPage />} />
+        <Route path="destinations/create" element={<CreateDestination />} />
+        <Route path="guides" element={<GuidesPage />} />
+        <Route path="reviews" element={<ReviewsPage />} />
+        <Route path="schedules" element={<TourSchedules />} />
+        <Route path="settings" element={<SystemSettings />} />
+        <Route path="tours" element={<TourSchedules />} />
+        <Route path="tours/create" element={<CreateTour />} />
 
-        <Route path="/admin/manageBooking" element={<ManageBooking />} />
+        <Route path="manageBooking" element={<ManageBooking />} />
+        <Route path="categoriesPage" element={<CategoriesPage />} />
+        <Route path="customerList" element={<CustomerList />} />
+        <Route path="stepPersonal" element={<Navigate to="/admin/settings" replace />} />
+        <Route path="tour-schedules" element={<TourSchedules />} />
+        <Route path="tour-schedules/create" element={<CreateTour />} />
+        <Route path="masters" element={<MastersTabs />} />
+        <Route path="masters/tours" element={<TourSchedules />} />
+        <Route path="masters/tours/new" element={<CreateTour />} />
+        <Route path="masters/categories" element={<CategoriesPage />} />
+        <Route path="masters/destinations" element={<DestinationsPage />} />
         <Route
-          path="/admin/masters"
-          element={<Navigate to="/admin/masters/destinations" replace />}
-        />
-        <Route
-          path="/admin/categories"
-          element={<ManageCategory page={CategoriesPage} />}
-        />
-        <Route path="/admin/categoriesPage" element={<CategoriesPage />} />
-
-        <Route path="/admin/masters/tours" element={<TourSchedules />} />
-        <Route path="/admin/masters/categories" element={<CategoriesPage />} />
-        <Route path="/admin/masters/guides" element={<GuidesPage />} />
-        <Route path="/admin/masters/schedules" element={<TourSchedules />} />
-
-        <Route path="/admin/customerList" element={<CustomerList />} />
-        <Route
-          path="/admin/masters/destinations/create"
+          path="masters/destinations/create"
           element={<CreateDestination />}
         />
-        <Route path="/admin/reviews" element={<ReviewsPage />} />
+        <Route path="masters/guides" element={<GuidesPage />} />
+        <Route path="masters/schedules" element={<TourSchedules />} />
         <Route
-          path="/admin/destinations/create"
-          element={<CreateDestination />}
+          path="reports"
+          element={
+            <Suspense
+              fallback={
+                <div className="p-6 text-sm font-medium text-slate-500">
+                  Loading reports...
+                </div>
+              }
+            >
+              <ReportsPage />
+            </Suspense>
+          }
         />
-        <Route
-          path="/admin/masters/destinations"
-          element={<DestinationsPage />}
-        />
-        <Route path="/admin/destinations" element={<DestinationsPage />} />
-        <Route path="/admin/tour-schedules" element={<TourSchedules />} />
-        <Route path="/admin/masters/tours/edit/:id" element={<EditTour />} />
-        <Route path="/admin/masters/tours/delete/:id" element={<DeleteTour />} />
+        <Route path="*" element={<Navigate to="/admin" replace />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/admin" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
-};
+}

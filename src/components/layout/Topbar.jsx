@@ -1,7 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Search, Bell, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMobileSidebar, cx } from "./Sidebar";
+import {
+  ADMIN_SETTINGS_STORAGE_KEY,
+  ADMIN_SETTINGS_UPDATED_EVENT,
+} from "../../constants/adminSettings";
+
+function readAdminProfile(fallbackName) {
+  try {
+    const stored = window.localStorage.getItem(ADMIN_SETTINGS_STORAGE_KEY);
+    const account = stored ? JSON.parse(stored).account : null;
+    return {
+      name: account?.adminName || fallbackName,
+      picture: account?.profilePicture || "",
+    };
+  } catch (error) {
+    console.error("Unable to load the saved admin profile.", error);
+    return { name: fallbackName, picture: "" };
+  }
+}
 
 /**
  * Dashboard top bar: search, notifications, profile trigger (dropdown-ready).
@@ -10,6 +28,36 @@ import { useMobileSidebar, cx } from "./Sidebar";
 export function Topbar({ className, userName = "Sok Dara", userRole = "Administrator" }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [, setMobileOpen] = useMobileSidebar();
+  const [profile, setProfile] = useState(() => readAdminProfile(userName));
+
+  useEffect(() => {
+    const updateProfile = (settings) => {
+      const account = settings?.account;
+      if (!account) return;
+      setProfile({
+        name: account.adminName || userName,
+        picture: account.profilePicture || "",
+      });
+    };
+    const handleSettingsUpdated = (event) => updateProfile(event.detail);
+    const handleStorage = (event) => {
+      if (event.key !== ADMIN_SETTINGS_STORAGE_KEY) return;
+      try {
+        updateProfile(event.newValue ? JSON.parse(event.newValue) : null);
+      } catch (error) {
+        console.error("Unable to read the updated admin profile.", error);
+      }
+    };
+
+    window.addEventListener(ADMIN_SETTINGS_UPDATED_EVENT, handleSettingsUpdated);
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      window.removeEventListener(ADMIN_SETTINGS_UPDATED_EVENT, handleSettingsUpdated);
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, [userName]);
+
+  const displayedName = profile.name || userName;
 
   return (
     <header
@@ -36,12 +84,12 @@ export function Topbar({ className, userName = "Sok Dara", userRole = "Administr
         />
         <input
           type="search"
-          placeholder="Search tours, bookings, customers..."
+          placeholder="Search"
           className={cx(
             "h-10 w-full rounded-full border border-slate-300 bg-slate-100/80 pl-9 pr-4 text-sm text-slate-900",
             "placeholder:text-slate-500 outline-none",
             "transition-all duration-200 ease-out",
-            "focus:bg-white focus:shadow-md focus:ring-2 focus:ring-indigo-400/50",
+            "focus:bg-white focus:shadow-md focus:ring-2 focus:ring-emerald-400/50",
           )}
         />
       </div>
@@ -68,11 +116,15 @@ export function Topbar({ className, userName = "Sok Dara", userRole = "Administr
             aria-expanded={menuOpen}
             className="flex items-center gap-2 rounded-full py-1.5 pl-1.5 pr-2 transition-colors duration-200 hover:bg-slate-100 md:pr-3"
           >
-            <span className="grid size-8 place-items-center rounded-full bg-indigo-600 text-sm font-semibold text-white md:size-9">
-              {userName.charAt(0)}
+            <span className="grid size-8 place-items-center overflow-hidden rounded-full bg-emerald-600 text-sm font-semibold text-white md:size-9">
+              {profile.picture ? (
+                <img src={profile.picture} alt="" className="h-full w-full object-cover" />
+              ) : (
+                displayedName.charAt(0)
+              )}
             </span>
             <span className="hidden text-left leading-tight sm:block">
-              <span className="block text-sm font-medium text-slate-900">{userName}</span>
+              <span className="block text-sm font-medium text-slate-900">{displayedName}</span>
               <span className="block text-xs text-slate-500">{userRole}</span>
             </span>
             <ChevronDown
@@ -93,7 +145,7 @@ export function Topbar({ className, userName = "Sok Dara", userRole = "Administr
                 transition={{ duration: 0.16, ease: "easeOut" }}
                 className="absolute right-0 z-50 mt-2 w-48 rounded-xl border border-slate-200 bg-white p-2 text-slate-900 shadow-lg"
               >
-                <p className="px-2 py-1.5 text-xs text-slate-500">Menu items coming soon</p>
+                <p className="px-2 py-1.5 text-xs text-slate-500">Menu coming soon</p>
               </motion.div>
             )}
           </AnimatePresence>

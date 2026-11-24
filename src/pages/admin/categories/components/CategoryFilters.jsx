@@ -28,7 +28,7 @@ export default function CategoryFilters({
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Search category…"
-          className="w-full h-10 text-sm rounded-full bg-slate-100/80 border border-slate-300 text-slate-900 pl-10 pr-4 placeholder:text-slate-500 outline-none transition-all duration-200 focus:bg-white focus:shadow-sm focus:ring-2 focus:ring-indigo-400/50"
+          className="w-full h-10 text-sm rounded-full bg-slate-100/80 border border-slate-300 text-slate-900 pl-10 pr-4 placeholder:text-slate-500 outline-none transition-all duration-200 focus:bg-white focus:shadow-sm focus:ring-2 focus:ring-brand/25"
         />
       </div>
 

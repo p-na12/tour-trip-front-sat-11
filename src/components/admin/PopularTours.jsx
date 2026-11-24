@@ -5,9 +5,10 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function PopularTours() {
+    const tourNames = ["Angkor Sunrise", "Mekong Delta", "Koh Rong Island", "Siem Reap Food"];
     // Convert your POPULAR_TOURS data to Chart.js format
     const data = {
-        labels: POPULAR_TOURS.map((tour) => tour.name),
+        labels: tourNames,
 
         datasets: [
             {
@@ -67,7 +68,7 @@ export default function PopularTours() {
                     <h3 className="text-lg font-bold text-slate-900">Popular Tours</h3>
 
                     <p className="mt-1 text-xs text-slate-400">
-                        Most popular tour categories
+                        Popular categories
                     </p>
                 </div>
 
@@ -102,11 +103,11 @@ export default function PopularTours() {
                     <span className="text-3xl font-bold text-slate-900">42</span>
 
                     <span className="mt-1 text-xs font-medium text-slate-400">
-                        Active Tours
+                        Active tours
                     </span>
 
-                    <span className="mt-1 text-[10px] font-semibold text-emerald-600">
-                        ↑ 8.4% this month
+                    <span className="mt-1 text-[10px] font-semibold text-green-600">
+                        +12% this month
                     </span>
                 </div>
             </div>
@@ -134,8 +135,8 @@ export default function PopularTours() {
                                     text-xs font-bold
                                     text-slate-500
                                     transition
-                                    group-hover:bg-teal-50
-                                    group-hover:text-teal-700
+                                    group-hover:bg-green-50
+                                    group-hover:text-green-700
                                 "
                             >
                                 {idx + 1}
@@ -150,7 +151,7 @@ export default function PopularTours() {
                             />
 
                             <span className="text-sm font-medium text-slate-600">
-                                {tour.name}
+                                {tourNames[idx]}
                             </span>
                         </div>
 
@@ -173,12 +174,12 @@ export default function PopularTours() {
                     py-2.5 text-xs font-semibold
                     text-slate-600
                     transition-all
-                    hover:border-teal-200
-                    hover:bg-teal-50
-                    hover:text-teal-700
+                    hover:border-green-200
+                    hover:bg-green-50
+                    hover:text-green-700
                 "
             >
-                View All Tours →
+                View all tours →
             </button>
         </div>
     );

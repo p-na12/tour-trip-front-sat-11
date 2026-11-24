@@ -5,7 +5,6 @@ import CategoryFilters from "./components/CategoryFilters";
 import CategoryTable from "./components/CategoryTable";
 import Pagination from "./components/Pagination";
 import CategoryFormModal from "./components/CategoryFormModal";
-import CategoryViewModal from "./components/CategoryViewModal";
 import DeleteConfirmDialog from "./components/DeleteConfirmDialog";
 import { PlusIcon, AlertTriangleIcon } from "./components/icons";
 
@@ -28,7 +27,6 @@ export default function CategoriesPage() {
   } = useCategories();
 
   const [formModal, setFormModal] = useState({ isOpen: false, category: null });
-  const [viewModal, setViewModal] = useState({ isOpen: false, category: null });
   const [deleteDialog, setDeleteDialog] = useState({
     isOpen: false,
     category: null,
@@ -87,7 +85,7 @@ export default function CategoriesPage() {
             <button
               type="button"
               onClick={openCreateCategoryPage}
-              className="gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-xl bg-teal-600 shadow-sm w-fit inline-flex items-center hover:bg-teal-700 transition-colors duration-150 shrink-0"
+              className="gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-xl bg-brand shadow-sm w-fit inline-flex items-center hover:bg-brand-hover transition-colors duration-150 shrink-0"
             >
               <PlusIcon width={17} height={17} />
               Add New Category

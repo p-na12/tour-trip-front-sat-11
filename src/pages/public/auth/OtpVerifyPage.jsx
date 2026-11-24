@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import OtpVerifyForm from "../../../components/auth/OtpVerifyForm";
 import { verifyOtp, resendOtp } from "../../../services/authService";
@@ -8,6 +9,7 @@ import { ShieldCheck } from "lucide-react";
 const OtpVerifyPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email; // passed from signup page
@@ -19,7 +21,10 @@ const OtpVerifyPage = () => {
       await verifyOtp({ email, code });
       navigate("/login");
     } catch (err) {
-      setError(err.message || "Invalid code, try again.");
+      const message = err.response?.data?.message;
+      const code = err.response?.data?.code;
+      const localizedMessage = typeof message === "object" ? message?.[i18n.language] : null;
+      setError(localizedMessage || (code === "INVALID_OTP" ? t("auth.invalidCode") : t("auth.requestFailed")));
     } finally {
       setLoading(false);
     }
@@ -29,7 +34,9 @@ const OtpVerifyPage = () => {
     try {
       await resendOtp({ email });
     } catch (err) {
-      setError(err.message || "Could not resend code.");
+      const message = err.response?.data?.message;
+      const localizedMessage = typeof message === "object" ? message?.[i18n.language] : null;
+      setError(localizedMessage || t("auth.resendFailed"));
     }
   };
 
@@ -42,21 +49,21 @@ const OtpVerifyPage = () => {
     >
       <div className="w-full max-w-md rounded-2xl bg-white p-6 text-center shadow-2xl sm:p-8">
         <ShieldCheck className="mx-auto mb-4 h-12 w-12 text-blue-700" />
-        <h2 className="text-2xl font-bold text-slate-800">Verify Your Email</h2>
+        <h2 className="text-2xl font-bold text-slate-800">{t("auth.verifyEmail")}</h2>
         <p className="mt-2 text-slate-600">
-          We've sent a 6-digit code to your email. Enter it below to confirm your identity {email || "."}
+          {t("auth.otpInstructions")} {email || ""}
         </p>
         <p className="mt-2 mb-10 text-blue-700">{email || "explorer@example.com"}</p>
         <OtpVerifyForm onSubmit={handleVerify} loading={loading} />
         {error && <p className="mt-5 text-red-600">{error}</p>}
         <p className="mt-4 text-slate-600">
-          Didn't receive the code?
+          {t("auth.didNotReceiveCode")}
         </p>
         <button
           onClick={handleResend}
           className="mt-4 font-medium text-blue-700 hover:text-blue-800"
         >
-          Resend code
+          {t("auth.resendCode")}
         </button>
       </div>
     </div>

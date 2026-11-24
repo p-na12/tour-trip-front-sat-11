@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { Download, Search, CalendarDays } from "lucide-react";
 import { ManageBookingData } from "../../../data/ManageBookingData";
+import { useAuth } from "../../../context/auth";
+import { useSearchParams } from "react-router-dom";
 
 function ManageBooking() {
   const tabs = ["All", "Pending", "Confirmed", "Completed", "Cancelled"];
+  const { bookings: customerBookings } = useAuth();
+  const [searchParams] = useSearchParams();
 
   const getStatusStyle = (status) => {
     switch (status) {
       case "Confirmed":
-        return "bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-semibold";
+        return "bg-brand/10 text-brand px-3 py-1 rounded-full font-semibold";
       case "Pending":
         return "bg-amber-100 text-amber-700 px-3 py-1 rounded-full font-semibold";
       case "Cancelled":
@@ -20,8 +24,20 @@ function ManageBooking() {
     }
   };
 
-  const [bookings] = useState(ManageBookingData);
-  const [search, setSearch] = useState("");
+  const bookings = [
+    ...customerBookings.map((booking) => ({
+      id: booking.reference || booking.id,
+      customerName: booking.customerName,
+      customerEmail: booking.email,
+      tourPackage: booking.tourName,
+      bookingDate: new Date(booking.bookingDate).toLocaleDateString(),
+      travelDate: booking.travelDate,
+      amount: Number(booking.totalPrice),
+      status: booking.status,
+    })),
+    ...ManageBookingData,
+  ];
+  const [search, setSearch] = useState(() => searchParams.get("customer") || "");
   const [activeTab, setActiveTab] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -30,6 +46,7 @@ function ManageBooking() {
   const filteredBookings = bookings.filter((b) => {
     const matchesSearch =
       b.customerName.toLowerCase().includes(search.toLowerCase()) ||
+      b.customerEmail?.toLowerCase().includes(search.toLowerCase()) ||
       b.tourPackage.toLowerCase().includes(search.toLowerCase()) ||
       b.id.toString().includes(search);
     const matchesTab = activeTab === "All" || b.status === activeTab;
@@ -51,7 +68,7 @@ function ManageBooking() {
         <h1 className="text-3xl font-bold tracking-tight text-black md:text-4xl">
           Manage Bookings
         </h1>
-        <button className="flex items-center gap-2 rounded-full border border-teal-500 px-6 py-3 text-sm font-medium text-teal-700 hover:bg-teal-50">
+        <button className="flex items-center gap-2 rounded-full border border-brand px-6 py-3 text-sm font-medium text-brand hover:bg-brand/5">
           <Download size={17} />
           Export Bookings
         </button>
@@ -70,7 +87,7 @@ function ManageBooking() {
               }}
               className={`px-4 py-2 rounded-full border text-sm font-medium transition ${
                 activeTab === tab
-                  ? "bg-teal-500 text-white border-teal-500"
+                  ? "bg-brand text-white border-brand"
                   : "bg-white text-slate-700 border-slate-200 hover:bg-gray-50"
               }`}
             >
@@ -95,7 +112,7 @@ function ManageBooking() {
                 setCurrentPage(1);
               }}
               placeholder="Search by ID, Customer, or Tour..."
-              className="h-12 w-full rounded-xl border border-slate-300 bg-white pl-12 pr-4 text-sm text-slate-700 outline-none focus:border-teal-500"
+              className="h-12 w-full rounded-xl border border-slate-300 bg-white pl-12 pr-4 text-sm text-slate-700 outline-none focus:border-brand"
             />
           </div>
 
@@ -136,7 +153,7 @@ function ManageBooking() {
                     </span>
                   </td>
                   <td className="px-6 py-5">
-                    <button className="text-blue-500 hover:text-blue-700 font-medium">
+                    <button className="text-brand hover:text-brand-hover font-medium">
                       
                     </button>
                   </td>
@@ -168,7 +185,7 @@ function ManageBooking() {
                 onClick={() => setCurrentPage(i + 1)}
                 className={`px-3 py-1 rounded text-sm font-medium ${
                   currentPage === i + 1
-                    ? "bg-teal-500 text-white"
+                    ? "bg-brand text-white"
                     : "bg-gray-100 text-slate-700 hover:bg-gray-200"
                 }`}
               >

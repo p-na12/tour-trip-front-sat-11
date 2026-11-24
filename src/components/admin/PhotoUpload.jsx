@@ -25,7 +25,7 @@ const PhotoUpload = ({ photo, onUpload, onRemove }) => {
             onDrop={(e) => { e.preventDefault(); setDragOver(false); handleFiles(e.dataTransfer.files); }}
             className={cx(
               "rounded-xl border-2 border-dashed p-6 flex flex-col items-center text-center transition-colors duration-200",
-              dragOver ? "border-teal-700 bg-teal-50/60" : "border-gray-200 bg-gray-50/50"
+              dragOver ? "border-brand bg-brand/5" : "border-gray-200 bg-gray-50/50"
             )}
           >
             <div className="w-24 h-24 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center overflow-hidden mb-4">
@@ -69,7 +69,7 @@ const PhotoUpload = ({ photo, onUpload, onRemove }) => {
                 <button
                   type="button"
                   onClick={() => inputRef.current?.click()}
-                  className="inline-flex items-center gap-2 text-[13px] font-semibold px-4 py-2 rounded-lg bg-teal-700 text-white hover:bg-teal-800 transition-colors font-body shadow-sm"
+                  className="inline-flex items-center gap-2 text-[13px] font-semibold px-4 py-2 rounded-lg bg-brand text-white hover:bg-brand-hover transition-colors font-body shadow-sm"
                 >
                   <Upload className="w-4 h-4" /> Upload Photo
                 </button>

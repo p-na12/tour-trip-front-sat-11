@@ -6,20 +6,20 @@ export default function CatalogPreviewCard({ formData }) {
     <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2 text-xs font-semibold text-gray-500">
-          <Eye className="w-4 h-4 text-emerald-600" />
+          <Eye className="w-4 h-4 text-brand" />
           Catalog Live Preview
         </div>
-        <span className="bg-emerald-50 text-emerald-700 text-xs px-2.5 py-1 rounded-full font-medium">
+        <span className="bg-brand/10 text-brand text-xs px-2.5 py-1 rounded-full font-medium">
           Real-time
         </span>
       </div>
 
       <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50">
         <div className="flex justify-between items-start mb-2">
-          <span className="bg-emerald-100 text-emerald-800 text-xs font-mono font-bold px-2 py-0.5 rounded">
+          <span className="bg-brand/15 text-brand text-xs font-mono font-bold px-2 py-0.5 rounded">
             {formData.categoryCode || "CAT-000"}
           </span>
-          <span className="text-xs bg-emerald-500/10 text-emerald-600 font-semibold px-2 py-0.5 rounded">
+          <span className="text-xs bg-brand/10 text-brand font-semibold px-2 py-0.5 rounded">
             {formData.status || "Active"}
           </span>
           <button className="text-gray-400 hover:text-gray-600">

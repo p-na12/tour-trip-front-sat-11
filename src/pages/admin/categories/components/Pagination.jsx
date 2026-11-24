@@ -35,7 +35,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange, tota
             className={[
               'flex items-center justify-center w-8 h-8 rounded-lg text-sm font-medium border transition-colors duration-150',
               page === currentPage
-                ? 'bg-teal-600 border-teal-600 text-white shadow-sm'
+                ? 'bg-brand border-brand text-white shadow-sm'
                 : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50',
             ].join(' ')}
           >
